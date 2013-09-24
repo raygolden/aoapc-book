@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>UVa Prolbem 10099 The Tourist Guide （导游） - 寂静山林 - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="// The Tourist Guide （导游）// PC/UVa IDs: 110903/10099, Popularity: B, Success rate: average Level: 3// Verdict: Accepted// Submission Date" />
+<script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+<link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/ink/css/style.css?v=1.1" />
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/metaphysis/rss/list" />
+<link rel="shortcut icon" href="../../../favicon.ico" />
+<link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+</head>
+<body>
+<script src="http://csdnimg.cn/pubnav/js/pub_topnav_2011.js"type="text/javascript"></script>
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1><a href="http://blog.csdn.net/metaphysis">寂静山林</a></h1>
+            <h2></h2>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg"></div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="http://blog.csdn.net/metaphysis?viewmode=contents"><span><img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/metaphysis?viewmode=list"><span><img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/metaphysis/rss/list"><span><img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "metaphysis";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/metaphysis";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";
+</script>
+
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/9819385" target="_blank">
+<font color=red>《这些年，我们读过的技术经典图书》主题有奖征文</font></a>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://www.csdn.net/article/2013-08-06/2816471" target="_blank"><font color=blue>专访李铁军：从医生到金山首席安全专家的转变 
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<a href="http://blog.csdn.net/adali/article/details/9813651"target="_blank">
+<font color=blue>独一无二的职位：开源社区经理 
+ </font></a>
+
+
+
+
+</div>
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="6824768.html">
+        UVa Prolbem 10099 The Tourist Guide （导游）
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/metaphysis/article/category/895070">图算法</a> 
+        </span>
+    <span class="link_postdate">2011-09-27 08:38</span>
+    <span class="link_view" title="阅读次数">635人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="6824768.html#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('UVa Prolbem 10099 The Tourist Guide （导游）','6824768');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="6824768.html#report"  onclick="javascript:report(6824768,2);return false;" title="举报">举报</a></span>
+    
+</div>
+<div class="tag2box"><a href='http://blog.csdn.net/tag/details.html?tag=graph' target=_blank>graph</a><a href='http://blog.csdn.net/tag/details.html?tag=%e7%ae%97%e6%b3%95' target=_blank>算法</a><a href='http://blog.csdn.net/tag/details.html?tag=struct' target=_blank>struct</a><a href='http://blog.csdn.net/tag/details.html?tag=c' target=_blank>c</a><a href='http://blog.csdn.net/tag/details.html?tag=%e6%97%85%e6%b8%b8' target=_blank>旅游</a><a href='http://blog.csdn.net/tag/details.html?tag=date' target=_blank>date</a></div>
+
+
+    
+<div id="article_content" class="article_content">
+
+<pre name="code" class="cpp">// The Tourist Guide （导游）
+// PC/UVa IDs: 110903/10099, Popularity: B, Success rate: average Level: 3
+// Verdict: Accepted
+// Submission Date: 2011-09-27
+// UVa Run Time: 0.020s
+//
+// 版权所有（C）2011，邱秋。metaphysis # yeah dot net
+//
+// [问题描述]
+// Mr. G. 在孟加拉国的一家旅游公司工作。他当前的任务是带一些游客去一个遥远的城市。和所有国家一样，
+// 一些城市之间有双向道路。每对相邻城市之间都有一条公交线路，每条线路都规定了自己最大乘客数目。Mr.
+// G. 有一份包含城市间道路状况和公交车最大载客容量的地图。
+//
+// 往往无法一次性地将所有乘客带往目的地。例如，在下面 7 个城市的地图中，边代表道路，每条边上的数字
+// 代表这条道路上公交车的最大载客量。
+//
+//                   60
+//            [2]--------[5]
+//           /   \          \
+//       30/      \25        \20
+//       /    10   \    35    \
+//     [1]--------[4]--------[7]
+//      \         /          /
+//     15\      / 40       /30
+//        \   /          /
+//         [3]--------[6]
+//               20
+//
+// 如果 Mr. G. 要将 99 位乘客从城市 1 带到城市 7，则至少需要往返 5 次（他必须陪同每一群游客）。
+// 最佳路线是 1 - 2 - 4 - 7。
+//
+// 帮助 Mr. G. 找出将所有游客带到目的地，且往返次数最少的线路。
+//
+// [输入]
+// 输入包含若干组数据。每组数据的第一行有两个整数 N （N &lt;= 100） 和 R，分别表示城市的数量和道路
+// 的数量。接下来的 R 行有 3 个整数 （C1，C2，P），其中 C1 和 C2 为城市编号，P（P &gt; 1） 是该
+// 道路上公交车的最大载客量。各城市编号为 1 ～ N 的连续整数。第 R + 1 行包含 3 个整数 （S，D，
+// T），分别表示出发城市，目的城市的编号和游客的数量。N = R = 0 时输入结束。
+//
+// [输出]
+// 对于每组输入数据，按照样例格式先输出一行数据编号，接下来在单独的一行中输出最少的往返次数。在每组
+// 数据的输出后打印一个空行。
+//
+// [样例输入]
+// 7 10
+// 1 2 30
+// 1 3 15
+// 1 4 10
+// 2 4 25
+// 2 5 60
+// 3 4 40
+// 3 6 20
+// 4 7 35
+// 5 7 20
+// 6 7 30
+// 1 7 99
+// 0 0
+//
+// [样例输出]
+// Scenario #1
+// Minimum Number of Trips = 5
+//
+// [解题方法]
+// 应用 Floyd-Warshall 算法可以方便的计算 Maxmin 距离从而可以容易的解决本题。注意导游必须陪同
+// 每一群游客的意思是假设公交线路载客量为 C，则一次能载游客为 C - 1，因为包括了导游，则往返的次数
+// 应该是 P / （C - 1） + （P % （C - 1） ？ 1 ： 0），同时不要忘了在每次输出后加空行。
+//
+// 有关 Floyd-Warshall 算法的更多应用，可参考网页：
+// http://aduni.org/courses/algorithms/courseware/handouts/Reciation_07.html#25504。
+
+#include &lt;iostream&gt;
+
+using namespace std;
+
+#define MAXV 101
+#define INT_MAX (-1)
+
+#define max(a, b) ((a) &gt; (b) ? (a) : (b))
+#define min(a, b) ((a) &lt; (b) ? (a) : (b))
+
+// 邻接矩阵。
+struct graph
+{
+	int weight[MAXV][MAXV];
+	int nvertices;
+};
+
+// 利用 Floyd-Warshall 算法计算 Maxmin 距离。
+int floyd_warshall(graph * g, int cstart, int cend)
+{
+	int vertices = g-&gt;nvertices;
+
+	for (int i = 1; i &lt;= vertices; i++)
+		g-&gt;weight[i][i] = 0;
+
+	for (int k = 1; k &lt;= vertices; k++)
+		for (int i = 1; i &lt;= vertices; i++)
+			for (int j = 1; j &lt;= vertices; j++)
+				g-&gt;weight[i][j] =
+					max(g-&gt;weight[i][j],
+					min(g-&gt;weight[i][k], g-&gt;weight[k][j]));
+
+	return g-&gt;weight[cstart][cend];
+}
+
+// 读入图的数据，cities 为城市数，roads 为公交路线数。
+void read_graph(graph * g, int cities, int roads)
+{
+	int cfirst, csecond, passengers;
+
+	for (int i = 1; i &lt; MAXV; i++)
+		for (int j = 1; j &lt; MAXV; j++)
+			g-&gt;weight[i][j] = INT_MAX;
+
+	g-&gt;nvertices = cities;
+
+	for (int r = 0; r &lt; roads; r++)
+	{
+		cin &gt;&gt; cfirst &gt;&gt; csecond &gt;&gt; passengers;
+
+		g-&gt;weight[cfirst][csecond] = passengers;
+		g-&gt;weight[csecond][cfirst] = passengers;
+	}
+}
+
+int main(int ac, char *av[])
+{
+	int cities, roads;
+	int cstart, cend, tourists;
+	int trips, cases = 1;
+	graph g;
+
+	while (cin &gt;&gt; cities &gt;&gt; roads, cities || roads)
+	{
+		// 读入图的数据。
+		read_graph(&amp;g, cities, roads);
+
+		// 读入起始城市和终点城市及游客数量。
+		cin &gt;&gt; cstart &gt;&gt; cend &gt;&gt; tourists;
+
+		// 利用 Floyd-Warshall 算法计算 Maxmin 距离。
+		int maxmin = floyd_warshall(&amp;g, cstart, cend);
+
+		maxmin = maxmin - 1;
+
+		// 若不能整除，则需要多一次往返。
+		trips = tourists / maxmin + (tourists % maxmin ? 1 : 0);
+
+		// 注意输出空行。
+		cout &lt;&lt; &quot;Scenario #&quot; &lt;&lt; cases++ &lt;&lt; endl;
+		cout &lt;&lt; &quot;Minimum Number of Trips = &quot; &lt;&lt; trips &lt;&lt; endl &lt;&lt; endl;
+	}
+
+	return 0;
+}</pre><br>
+<br>
+<br>
+<br>
+
+</div>
+
+<div class="share_buttons" id="sharePanel"></div>
+<!--192.168.100.34-->
+<div class="article_next_prev">
+    <li class="prev_article"><span>上一篇：</span><a href="6821788.html">UVa Problem 10067 Playing With Wheels （摆弄轮子）</a></li>
+    <li class="next_article"><span>下一篇：</span><a href="6828457.html">UVa Problem 705 Slash Maze （斜线迷宫）</a></li>
+</div>
+
+
+            <div id="digg" ArticleId="6824768">
+            <dl id="btnDigg" class="digg digg_disable">
+                <dt>顶</dt>
+                <dd>9</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+                <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+</div>
+<div id="ad_cen">
+<script type="text/javascript" >BAIDU_CLB_SLOT_ID = "117306";</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>
+</div>
+<script type="text/javascript">
+    //new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"></div>
+<div id="comment_bar"></div>
+<div id="comment_form"></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '6824768';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+<div id="ad_bot"></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+<div id="d-top" style="display:none;">
+<a id="d-top-a" href="6824768.html#" title="回到顶部">
+<img src="http://static.blog.csdn.net/images/top.png" alt="TOP" /></a>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var d_top=$('#d-top');
+        document.onscroll=function(){
+            var scrTop=(document.body.scrollTop||document.documentElement.scrollTop);
+            if(scrTop>500){
+                d_top.show();
+            }else{
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function(){
+            scrollTo(0,0);
+            this.blur();
+            return false;
+        });
+    });
+</script>
+
+<div class="clear"></div>
+</div>
+</div>
+
+<div id="side">
+<div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/metaphysis" target="_blank">
+    <img src="http://avatar.csdn.net/7/5/C/1_metaphysis.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/metaphysis" class="user_name" target="_blank">metaphysis</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]"></a>
+</div>
+<div id="blog_medal">
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>118064次</span></li>
+    <li>积分：<span>2991分</span></li>
+    <li>排名：<span>第2304名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>145篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>150条</span></li>
+</ul>
+</ul>
+</div>
+
+<div class="panel">
+<ul class="panel_body" style="padding:0;">
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script> 
+<script type="text/javascript"> 
+BAIDU_CLB_preloadSlots("724643","117306"); 
+</script>
+<script type="text/javascript">BAIDU_CLB_fillSlot("724643");</script> 
+</ul>
+</div>
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="submit" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825017">入门</a><span>(16)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/833251">回溯法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825019">字符串</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825020">排序</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825018">数据结构</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/831168">数论</a><span>(10)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828006">算术与代数</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828459">组合数学</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/861876">日常应用</a><span>(3)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/894878">图遍历</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895070">图算法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a><span>(14)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895072">网格</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895073">几何</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895074">计算几何</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895619">算法总结</a><span>(3)</span>
+</li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="http://blog.csdn.net/metaphysis/article/month/2013/05">2013年05月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2013/04">2013年04月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/12">2011年12月</a><span>(13)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/11">2011年11月</a><span>(34)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/10">2011年10月</a><span>(24)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/09">2011年09月</a><span>(6)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/07">2011年07月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/06">2011年06月</a><span>(17)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/05">2011年05月</a><span>(42)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head"><span>阅读排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(9824)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(3624)</span>
+</li>
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(3251)</span>
+</li>
+<li>
+<a href="6885767.html" title="Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11">Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11</a><span>(3137)</span>
+</li>
+<li>
+<a href="6560047.html" title="UVa Problem 10181 15-Puzzle Problem （15 数码游戏）">UVa Problem 10181 15-Puzzle Problem （15 数码游戏）</a><span>(1989)</span>
+</li>
+<li>
+<a href="6668040.html" title="Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法">Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法</a><span>(1965)</span>
+</li>
+<li>
+<a href="6860405.html" title="UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）">UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）</a><span>(1507)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(1475)</span>
+</li>
+<li>
+<a href="6877397.html" title="UVa Problem 10261 Ferry Loading （渡船装载）">UVa Problem 10261 Ferry Loading （渡船装载）</a><span>(1367)</span>
+</li>
+<li>
+<a href="6953949.html" title="UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）">UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）</a><span>(1281)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend"></ul>
+</div>
+<script type="text/javascript">
+ new Ad(12, 'ad_commend');
+</script><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u010537978" class="user_name">u010537978</a>:
+天外有天，人外有人！一个不是搞计算机算法的人能写出如此程序与我们分享,感谢！与惭愧！
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:刚才自己测试了下，确实 16 块就可以了。我已经在程序中做了修正。
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:哦？！您能在回复里面给出具体的拆分方案吗？
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/vania" class="user_name">vania</a>:
+如果我的代码没算错的话，n = 47时用16块小方块也可以拼出来。而且我用我的16块的方案在uva上...
+    </p>
+    </li>
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/kisstears" class="user_name">kisstears</a>:
+楼主这都是你自己写的啊？厉害
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@u011044487:你能详细描述一下你的算法过程吗？看代码有点乱。
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011044487" class="user_name">u011044487</a>:
+博主，我用的好像是DFS，但老是WA。能否帮我看一下。http://vdisk.weibo.com/...
+    </p>
+    </li>
+    <li>
+    <a href="8775269.html#comments">“No mapping for the Unicode character exists in the target multi-byte code page” 错误解决方法</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/acrodelphi" class="user_name">acrodelphi</a>:
+客户端修改：使用FileZilla免费的FTP客户端软件，把“站点属性-字符集”，修改为“强制UTF...
+    </p>
+    </li>
+    <li>
+    <a href="6432193.html#comments">UVa Problem 843 Crypt Kicker （解密）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/zeroalex" class="user_name">zeroalex</a>:
+我参考您的自己写了个代码可还是wa可以请你帮我看一下问题吗...
+    </p>
+    </li>
+    <li>
+    <a href="6431937.html#comments">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011377352" class="user_name">u011377352</a>:
+@u011377352:好了我明白了i，j按原来顺序输出额
+    </p>
+    </li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(18)</span>
+</li>
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432062.html" title="UVa Problem 10137 The Trip （旅行）">UVa Problem 10137 The Trip （旅行）</a><span>(12)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(7)</span>
+</li>
+<li>
+<a href="6432094.html" title="UVa Problem 10196 Check the Check （将军）">UVa Problem 10196 Check the Check （将军）</a><span>(7)</span>
+</li>
+<li>
+<a href="6939857.html" title="UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）">UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）</a><span>(6)</span>
+</li>
+<li>
+<a href="6453207.html" title="UVa Problem 10202 Pairsumonious Numbers （两两之和）">UVa Problem 10202 Pairsumonious Numbers （两两之和）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432193.html" title="UVa Problem 843 Crypt Kicker （解密）">UVa Problem 843 Crypt Kicker （解密）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432247.html" title="UVa Problem 10044 Erdos Numbers （Erdos 数）">UVa Problem 10044 Erdos Numbers （Erdos 数）</a><span>(5)</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js?v=1.1"></script>
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=75031"></script>
+
+<script type="text/javascript">
+document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js?v=1"></script>
+
+
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+
+<script type="text/javascript" src="http://zz.csdn.net/js/count.js"></script>
+
+</div>
+</body>
+</html>

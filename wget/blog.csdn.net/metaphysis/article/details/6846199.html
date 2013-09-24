@@ -1,0 +1,698 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>UVa Problem 10039 Railroads （铁路） - 寂静山林 - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="// Railroads （铁路）// PC/UVa IDs: 111004/10039, Popularity: C, Success rate: average Level: 3// Verdict: Accepted// Submission Date: 2011-1" />
+<script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+<link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/ink/css/style.css?v=1.1" />
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/metaphysis/rss/list" />
+<link rel="shortcut icon" href="../../../favicon.ico" />
+<link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+</head>
+<body>
+<script src="http://csdnimg.cn/pubnav/js/pub_topnav_2011.js"type="text/javascript"></script>
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1><a href="http://blog.csdn.net/metaphysis">寂静山林</a></h1>
+            <h2></h2>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg"></div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="http://blog.csdn.net/metaphysis?viewmode=contents"><span><img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/metaphysis?viewmode=list"><span><img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/metaphysis/rss/list"><span><img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "metaphysis";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/metaphysis";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";
+</script>
+
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/9819385" target="_blank">
+<font color=red>《这些年，我们读过的技术经典图书》主题有奖征文</font></a>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://www.csdn.net/article/2013-08-06/2816471" target="_blank"><font color=blue>专访李铁军：从医生到金山首席安全专家的转变 
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<a href="http://blog.csdn.net/adali/article/details/9813651"target="_blank">
+<font color=blue>独一无二的职位：开源社区经理 
+ </font></a>
+
+
+
+
+</div>
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="6846199.html">
+        UVa Problem 10039 Railroads （铁路）
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a> 
+        </span>
+    <span class="link_postdate">2011-10-06 01:24</span>
+    <span class="link_view" title="阅读次数">913人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="6846199.html#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('UVa Problem 10039 Railroads （铁路）','6846199');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="6846199.html#report"  onclick="javascript:report(6846199,2);return false;" title="举报">举报</a></span>
+    
+</div>
+<div class="tag2box"><a href='http://blog.csdn.net/tag/details.html?tag=cache' target=_blank>cache</a><a href='http://blog.csdn.net/tag/details.html?tag=output' target=_blank>output</a><a href='http://blog.csdn.net/tag/details.html?tag=each' target=_blank>each</a><a href='http://blog.csdn.net/tag/details.html?tag=string' target=_blank>string</a><a href='http://blog.csdn.net/tag/details.html?tag=input' target=_blank>input</a><a href='http://blog.csdn.net/tag/details.html?tag=search' target=_blank>search</a></div>
+
+
+    
+<div id="article_content" class="article_content">
+
+<pre name="code" class="cpp">// Railroads （铁路）
+// PC/UVa IDs: 111004/10039, Popularity: C, Success rate: average Level: 3
+// Verdict: Accepted
+// Submission Date: 2011-10-05
+// UVa Run Time: 0.392s
+//
+// 版权所有（C）2011，邱秋。metaphysis # yeah dot net
+//
+// [Problem Description]
+// Tomorrow morning Jill must travel from Hamburg to Darmstadt to compete in the
+// regional programming contest. Since she is afraid of arriving late and being
+// excluded from the contest, she is looking for the train which gets her to
+// Darmstadt as early as possible. However, she dislikes getting to the station
+// too early, so if there are several schedules with the same arrival time then
+// she will choose the one with the latest departure time.
+//
+// Jill asks you to help her with her problem. You are given a set of railroad
+// schedules from which you must compute the train with the earliest arrival time
+// and the fastest connection from one location to another. Fortunately, Jill is
+// very experienced in changing trains and can do this instantaneously, i.e., in
+// zero time!
+// 
+// [Input]
+// The very first line of the input gives the number of scenarios. Each scenario
+// consists of three parts. The first part lists the names of all cities connected
+// by the railroads. It starts with a number 1 &lt; C &lt;= 100, followed by C lines
+// containing city names. All names consist only of letters.
+//
+// The second part describes all the trains running during a day. It starts with
+// a number T &lt;= 1,000 followed by T train descriptions. Each of them consists
+// of one line with a number ti &lt;= 100 and then ti more lines, each with a time
+// and a city name, meaning that passengers can get on or off the train at that
+// time at that city.
+//
+// The final part consists of three lines: the first containing the earliest
+// possible starting time, the second the name of the city where she starts, and
+// the third with the destination city. The start and destination cities are always
+// different.
+//
+// [Output]
+// For each scenario print a line containing ``Scenario i'', where i is the
+// scenario number starting from 1.
+//
+// If a connection exists, print the two lines containing zero padded timestamps
+// and locations as shown in the example. Use blanks to achieve the indentation.
+// If no connection exists on the same day (i.e., arrival before midnight), print
+// a line containing ``No connection''.
+//
+// Print a blank line after each scenario.
+//
+// [Sample Input]
+// 2
+// 3
+// Hamburg
+// Frankfurt
+// Darmstadt
+// 3
+// 2
+// 0949 Hamburg
+// 1006 Frankfurt
+// 2
+// 1325 Hamburg
+// 1550 Darmstadt
+// 2
+// 1205 Frankfurt
+// 1411 Darmstadt
+// 0800
+// Hamburg
+// Darmstadt
+// 2
+// Paris
+// Tokyo
+// 1
+// 2
+// 0100 Paris
+// 2300 Tokyo
+// 0800
+// Paris
+// Tokyo
+//
+// [Sample Output]
+// Scenario 1
+// Departure 0949 Hamburg
+// Arrival   1411 Darmstadt
+//
+// Scenario 2
+// No connection
+//
+// [解题方法]
+// 题意需要求最早到达的最晚出发路线，从题目所给条件可以建模成有向图，然后从给定城市寻找到目标城市的
+// 所有通路，这个可以通过宽度优先遍历来获得，与 UVa 10187 From Dusk till Dawn 类似，然后再比
+// 较出发时间和到达时间，得到正确答案，当数据量较少时，可以很快得到正确结果，但是当火车列数和城市数
+// 较多时，则因大量计算无法 AC，故用动态规划来加速。设立一个二维数组，表示到达时间为 T ，到达城市为
+// C 时的最早出发时间，根据每个城市的路线情况来更新这个二维数组的值，最后从中间寻找是否有通路，若有
+// 通路，则找出其最晚出发时间。
+
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+
+using namespace std;
+
+#define MAXV 100
+#define MAXTIME 2400
+#define NO_CONNECTION (-1)
+
+struct edge
+{
+	int departure;
+	int arrival;
+	int to;
+
+	bool operator&lt;(const edge &amp;e) const
+	{
+		return departure &lt; e.departure;
+	}
+};
+
+vector &lt; edge &gt; edges[MAXV];
+
+// 缓存：到达时间为 T，到达城市为 C 的最晚出发时间。
+int cache[MAXTIME][MAXV];
+
+// DP 搜索。
+void search(int tdeparture, int from, int to, string cstart, string cdestination)
+{
+	edge e;
+
+	// 初始化缓存。
+	for (int i = 0; i &lt; MAXTIME; i++)
+		for (int j = 0; j &lt; MAXV; j++)
+			cache[i][j] = NO_CONNECTION;
+
+	// 排序，将出发时间早的排在前面，可以减少一些后续比较时的运行时间，可根据情况选用。
+	for (int i = 0; i &lt; MAXV; i++)
+		sort(edges[i].begin(), edges[i].end());
+
+	// 设定初始条件。
+	for (int i = 0; i &lt; edges[from].size(); i++)
+	{
+		e = edges[from][i];
+		if (e.departure &lt; tdeparture)
+			continue;
+
+		// 更新缓存信息。
+		cache[e.arrival][e.to] = max(cache[e.arrival][e.to], e.departure);
+	}
+
+	// 动态规划。
+	for (int i = 0; i &lt; MAXTIME; i++)
+		for (int j = 0; j &lt; MAXV; j++)
+		{
+			// 若为 NO_CONNECTION，不需处理。
+			if (cache[i][j] == NO_CONNECTION)
+				continue;
+			
+			for (int k = edges[j].size() - 1; k &gt;= 0; k--)
+			{
+				// 如果当前时间晚于此城市所有路线的最晚出发时间，则不可能在
+				// 当天再乘坐火车前往其他城市。
+				if (i &gt; edges[j][k].departure)
+					break;
+
+				// 路线到达下一城市的时间。
+				int arrival = edges[j][k].arrival;
+				// 路线到达的下一城市。
+				int next = edges[j][k].to;
+
+				// 更新到达时间为 arrival，到达城市为 next 时的最晚出发时间。
+				cache[arrival][next] =
+					max(cache[arrival][next], cache[i][j]);
+			}
+		}
+
+	// 查找是否存在路线。
+	for (int i = 0; i &lt; MAXTIME; i++)
+		if (cache[i][to] != NO_CONNECTION)
+		{
+			cout &lt;&lt; &quot;Departure &quot; &lt;&lt; setw(4) &lt;&lt; setfill('0');
+			cout &lt;&lt; cache[i][to] &lt;&lt; &quot; &quot; &lt;&lt; cstart &lt;&lt; endl;
+			cout &lt;&lt; &quot;Arrival   &quot; &lt;&lt; setw(4) &lt;&lt; setfill('0');
+			cout &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; cdestination &lt;&lt; endl;
+
+			return;
+		}
+
+	cout &lt;&lt; &quot;No connection&quot; &lt;&lt; endl;
+}
+
+int main(int ac, char *av[])
+{
+	int output = 1, cases, ncities, routes, nstations;
+	string city;
+	int tprevious, tcurrent, tdeparture;
+	string cprevious, ccurrent, cstart, cdestination;
+
+	cin &gt;&gt; cases;
+	while (cases--)
+	{
+		// 读入城市名。
+		map &lt; string, int &gt; cities;
+
+		cin &gt;&gt; ncities;
+		for (int c = 0; c &lt; ncities; c++)
+		{
+			cin &gt;&gt; city;
+			cities[city] = c;
+			edges[c].clear();
+		}
+
+		// 建有向图。
+		cin &gt;&gt; routes;
+		for (int c = 1; c &lt;= routes; c++)
+		{
+			cin &gt;&gt; nstations;
+			for (int m = 1; m &lt;= nstations; m++)
+			{
+				cin &gt;&gt; tcurrent &gt;&gt; ccurrent;
+
+				if (m &gt; 1)
+					edges[cities[cprevious]].push_back(
+					(edge){tprevious, tcurrent, cities[ccurrent]});
+
+				tprevious = tcurrent;
+				cprevious = ccurrent;
+			}
+		}
+
+		cout &lt;&lt; &quot;Scenario &quot; &lt;&lt; output++ &lt;&lt; endl;
+
+		// 读入出发时间，出发城市和终点城市。
+		cin &gt;&gt; tdeparture &gt;&gt; cstart &gt;&gt; cdestination;
+		// 使用动态规划找到从出发城市到终点城市最晚出发最早到达时间。
+		search(tdeparture, cities[cstart], cities[cdestination],
+							cstart, cdestination);
+		cout &lt;&lt; endl;
+	}
+
+	return 0;
+}</pre><br>
+<br>
+
+</div>
+
+<div class="share_buttons" id="sharePanel"></div>
+<!--192.168.100.34-->
+<div class="article_next_prev">
+    <li class="prev_article"><span>上一篇：</span><a href="6845366.html">UVa Problem 10278 Fire Station （消防站）</a></li>
+    <li class="next_article"><span>下一篇：</span><a href="6848901.html">UVa Problem 10158 War （战争）</a></li>
+</div>
+
+
+            <div id="digg" ArticleId="6846199">
+            <dl id="btnDigg" class="digg digg_disable">
+                <dt>顶</dt>
+                <dd>8</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+                <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+</div>
+<div id="ad_cen">
+<script type="text/javascript" >BAIDU_CLB_SLOT_ID = "117306";</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>
+</div>
+<script type="text/javascript">
+    //new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"></div>
+<div id="comment_bar"></div>
+<div id="comment_form"></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '6846199';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+<div id="ad_bot"></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+<div id="d-top" style="display:none;">
+<a id="d-top-a" href="6846199.html#" title="回到顶部">
+<img src="http://static.blog.csdn.net/images/top.png" alt="TOP" /></a>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var d_top=$('#d-top');
+        document.onscroll=function(){
+            var scrTop=(document.body.scrollTop||document.documentElement.scrollTop);
+            if(scrTop>500){
+                d_top.show();
+            }else{
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function(){
+            scrollTo(0,0);
+            this.blur();
+            return false;
+        });
+    });
+</script>
+
+<div class="clear"></div>
+</div>
+</div>
+
+<div id="side">
+<div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/metaphysis" target="_blank">
+    <img src="http://avatar.csdn.net/7/5/C/1_metaphysis.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/metaphysis" class="user_name" target="_blank">metaphysis</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]"></a>
+</div>
+<div id="blog_medal">
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>118064次</span></li>
+    <li>积分：<span>2991分</span></li>
+    <li>排名：<span>第2304名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>145篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>150条</span></li>
+</ul>
+</ul>
+</div>
+
+<div class="panel">
+<ul class="panel_body" style="padding:0;">
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script> 
+<script type="text/javascript"> 
+BAIDU_CLB_preloadSlots("724643","117306"); 
+</script>
+<script type="text/javascript">BAIDU_CLB_fillSlot("724643");</script> 
+</ul>
+</div>
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="submit" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825017">入门</a><span>(16)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/833251">回溯法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825019">字符串</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825020">排序</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825018">数据结构</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/831168">数论</a><span>(10)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828006">算术与代数</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828459">组合数学</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/861876">日常应用</a><span>(3)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/894878">图遍历</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895070">图算法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a><span>(14)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895072">网格</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895073">几何</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895074">计算几何</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895619">算法总结</a><span>(3)</span>
+</li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="http://blog.csdn.net/metaphysis/article/month/2013/05">2013年05月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2013/04">2013年04月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/12">2011年12月</a><span>(13)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/11">2011年11月</a><span>(34)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/10">2011年10月</a><span>(24)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/09">2011年09月</a><span>(6)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/07">2011年07月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/06">2011年06月</a><span>(17)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/05">2011年05月</a><span>(42)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head"><span>阅读排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(9824)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(3624)</span>
+</li>
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(3251)</span>
+</li>
+<li>
+<a href="6885767.html" title="Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11">Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11</a><span>(3137)</span>
+</li>
+<li>
+<a href="6560047.html" title="UVa Problem 10181 15-Puzzle Problem （15 数码游戏）">UVa Problem 10181 15-Puzzle Problem （15 数码游戏）</a><span>(1989)</span>
+</li>
+<li>
+<a href="6668040.html" title="Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法">Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法</a><span>(1965)</span>
+</li>
+<li>
+<a href="6860405.html" title="UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）">UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）</a><span>(1507)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(1475)</span>
+</li>
+<li>
+<a href="6877397.html" title="UVa Problem 10261 Ferry Loading （渡船装载）">UVa Problem 10261 Ferry Loading （渡船装载）</a><span>(1367)</span>
+</li>
+<li>
+<a href="6953949.html" title="UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）">UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）</a><span>(1281)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend"></ul>
+</div>
+<script type="text/javascript">
+ new Ad(12, 'ad_commend');
+</script><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u010537978" class="user_name">u010537978</a>:
+天外有天，人外有人！一个不是搞计算机算法的人能写出如此程序与我们分享,感谢！与惭愧！
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:刚才自己测试了下，确实 16 块就可以了。我已经在程序中做了修正。
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:哦？！您能在回复里面给出具体的拆分方案吗？
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/vania" class="user_name">vania</a>:
+如果我的代码没算错的话，n = 47时用16块小方块也可以拼出来。而且我用我的16块的方案在uva上...
+    </p>
+    </li>
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/kisstears" class="user_name">kisstears</a>:
+楼主这都是你自己写的啊？厉害
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@u011044487:你能详细描述一下你的算法过程吗？看代码有点乱。
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011044487" class="user_name">u011044487</a>:
+博主，我用的好像是DFS，但老是WA。能否帮我看一下。http://vdisk.weibo.com/...
+    </p>
+    </li>
+    <li>
+    <a href="8775269.html#comments">“No mapping for the Unicode character exists in the target multi-byte code page” 错误解决方法</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/acrodelphi" class="user_name">acrodelphi</a>:
+客户端修改：使用FileZilla免费的FTP客户端软件，把“站点属性-字符集”，修改为“强制UTF...
+    </p>
+    </li>
+    <li>
+    <a href="6432193.html#comments">UVa Problem 843 Crypt Kicker （解密）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/zeroalex" class="user_name">zeroalex</a>:
+我参考您的自己写了个代码可还是wa可以请你帮我看一下问题吗...
+    </p>
+    </li>
+    <li>
+    <a href="6431937.html#comments">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011377352" class="user_name">u011377352</a>:
+@u011377352:好了我明白了i，j按原来顺序输出额
+    </p>
+    </li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(18)</span>
+</li>
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432062.html" title="UVa Problem 10137 The Trip （旅行）">UVa Problem 10137 The Trip （旅行）</a><span>(12)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(7)</span>
+</li>
+<li>
+<a href="6432094.html" title="UVa Problem 10196 Check the Check （将军）">UVa Problem 10196 Check the Check （将军）</a><span>(7)</span>
+</li>
+<li>
+<a href="6939857.html" title="UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）">UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）</a><span>(6)</span>
+</li>
+<li>
+<a href="6453207.html" title="UVa Problem 10202 Pairsumonious Numbers （两两之和）">UVa Problem 10202 Pairsumonious Numbers （两两之和）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432193.html" title="UVa Problem 843 Crypt Kicker （解密）">UVa Problem 843 Crypt Kicker （解密）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432247.html" title="UVa Problem 10044 Erdos Numbers （Erdos 数）">UVa Problem 10044 Erdos Numbers （Erdos 数）</a><span>(5)</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js?v=1.1"></script>
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=75031"></script>
+
+<script type="text/javascript">
+document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js?v=1"></script>
+
+
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+
+<script type="text/javascript" src="http://zz.csdn.net/js/count.js"></script>
+
+</div>
+</body>
+</html>

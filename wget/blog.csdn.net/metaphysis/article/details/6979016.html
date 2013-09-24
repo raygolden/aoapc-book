@@ -1,0 +1,692 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>UVa Problem 849 Radar Tracking （雷达追踪） - 寂静山林 - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="// Radar Tracking （雷达追踪）// PC/UVa IDs: 111406/849, Popularity: C, Success rate: low Level: 2// Verdict: Wrong Answer// Submission Date: 2011-11-14// UVa Run Time: N/A//// 版权所有（C）2011，邱秋。metaphys" />
+<script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+<link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/ink/css/style.css?v=1.1" />
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/metaphysis/rss/list" />
+<link rel="shortcut icon" href="../../../favicon.ico" />
+<link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+</head>
+<body>
+<script src="http://csdnimg.cn/pubnav/js/pub_topnav_2011.js"type="text/javascript"></script>
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1><a href="http://blog.csdn.net/metaphysis">寂静山林</a></h1>
+            <h2></h2>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg"></div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="http://blog.csdn.net/metaphysis?viewmode=contents"><span><img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/metaphysis?viewmode=list"><span><img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/metaphysis/rss/list"><span><img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "metaphysis";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/metaphysis";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";
+</script>
+
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/9819385" target="_blank">
+<font color=red>《这些年，我们读过的技术经典图书》主题有奖征文</font></a>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://www.csdn.net/article/2013-08-06/2816471" target="_blank"><font color=blue>专访李铁军：从医生到金山首席安全专家的转变 
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<a href="http://blog.csdn.net/adali/article/details/9813651"target="_blank">
+<font color=blue>独一无二的职位：开源社区经理 
+ </font></a>
+
+
+
+
+</div>
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="6979016.html">
+        UVa Problem 849 Radar Tracking （雷达追踪）
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/metaphysis/article/category/895074">计算几何</a> 
+        </span>
+    <span class="link_postdate">2011-11-16 22:02</span>
+    <span class="link_view" title="阅读次数">357人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="6979016.html#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('UVa Problem 849 Radar Tracking （雷达追踪）','6979016');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="6979016.html#report"  onclick="javascript:report(6979016,2);return false;" title="举报">举报</a></span>
+    
+</div>
+<div class="tag2box"><a href='http://blog.csdn.net/tag/details.html?tag=c' target=_blank>c</a><a href='http://blog.csdn.net/tag/details.html?tag=up' target=_blank>up</a><a href='http://blog.csdn.net/tag/details.html?tag=distance' target=_blank>distance</a><a href='http://blog.csdn.net/tag/details.html?tag=360' target=_blank>360</a><a href='http://blog.csdn.net/tag/details.html?tag=%e6%b5%8b%e8%af%95' target=_blank>测试</a><a href='http://blog.csdn.net/tag/details.html?tag=struct' target=_blank>struct</a></div>
+
+
+    
+<div id="article_content" class="article_content">
+
+<pre name="code" class="cpp">// Radar Tracking （雷达追踪）
+// PC/UVa IDs: 111406/849, Popularity: C, Success rate: low Level: 2
+// Verdict: Wrong Answer
+// Submission Date: 2011-11-14
+// UVa Run Time: N/A
+//
+// 版权所有（C）2011，邱秋。metaphysis # yeah dot net
+//
+// [解题方法]
+// 雷达的角速度为 PI 弧度每秒。所有物体均是沿直线运动（不考虑圆周运动或其他曲线运动的情况）。方程
+// 是超越方程，需要使用近似解法来解方程。或者直接使用枚举的办法，因为角度要求是小数点后两位数。
+//
+// 不知道是 UVa 上的测试数据的问题还是怎样，我无法 AC，看了 UVa 的帖子才知道，确实有问题，可能我
+// 使用的算法和 AC 代码使用的不一样，不能得到相同 “错误” 的答案，就算帖子中作者认为正确的数据，
+// 我核实了一下，也是有问题的，本题暂且放一下，期望高手能给予指点，UVa 上面才只有 15 个人通过了
+// 本题，通过率是少见的低，应该是测试数据的问题。
+
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;iomanip&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+#define MAXN 3
+#define PI 3.141592653589793
+#define EPSILON (1E-12)
+
+#define COUNTER_CLOCKWISE 0
+#define CLOCKWISE_SAME_SAME_CYCLE 1
+#define CLOCKWISE_SAME_NEXT_CYCLE 2
+#define CLOCKWISE_NEXT_NEXT_CYCLE 3
+
+struct point
+{
+	double angle;
+	double distance;
+};
+
+bool cmp(point a, point b)
+{
+	if (a.angle != b.angle)
+		return a.angle &lt; b.angle;
+	return a.distance &gt; b.distance;
+}
+
+double radians(double degree)
+{
+	return (degree / 180.0) * PI;
+}
+
+double degrees(double radian)
+{
+	return (radian / PI) * 180.0;
+}
+
+double value(double b, double c, double B, double C, double x, int type)
+{
+	switch (type)
+	{
+		case COUNTER_CLOCKWISE:
+			return b * sin(x) / sin(B + C + x) - c * (2.0 * PI - x) / (2.0 * PI - C);
+			break;
+		case CLOCKWISE_SAME_SAME_CYCLE:
+			return b * sin(x) / sin(B + C + x) - c * x / C;
+			break;
+		case CLOCKWISE_SAME_NEXT_CYCLE:
+			return b * sin(x) / sin(B + C + x) - c * (2.0 * PI + x) / C;
+			break;		
+		case CLOCKWISE_NEXT_NEXT_CYCLE:
+			return b * sin(x) / sin(B + C + x) - c * (2.0 * PI + x) / (2.0 * PI + C);
+			break;
+	}
+}
+
+double bisection(double b, double c, double B, double C, int type)
+{
+	// 设第三个观察位置与第二个观察位置的角度差为 x 弧度，则由三角关系和
+	// 雷达的扫描角速度以及物体的运动速度，可以得到如下方程。
+	//
+	// b * sin(x) / sin(B + C + x) - c * (2 * PI - x) / (2 * PI - C) = 0。
+	//
+	// 由二分法得到近似解。x 的区间为 （0，PI - B - C）。首先找到大于
+	// 0 时的 x 值，已经明确，当 x = 0 时，函数值小于 0，则需要找到一
+	// 个值，使得函数值大于 0。
+	double up = PI - B - C, down = 0.0;
+	double x = (up + down) / 2.0;
+	while (value(b, c, B, C, x, type) &lt; 0)
+		x = (up + x) / 2.0;
+
+	// 此时函数值大于 0。
+	up = x;
+
+	// 目前 f（up） 和 f（down） 异号，则区间 （down，up） 有解。
+	while (fabs(up - down) &gt; EPSILON)
+	{
+		x = (up + down) / 2.0;
+		if (value(b, c, B, C, x, type) * value(b, c, B, C, up, type) &gt; 0)
+			up = x;
+		else
+			down = x;
+	}
+	
+	return x;
+}
+
+void possibleSolutions(point first, point second)
+{
+	point possible[MAXN];
+	int solutions = 0;
+
+	// 当前后两次的角度相同时，说明物体的运动轨迹是过极点的直线，且前两次观察结果方向相同。
+	if (first.angle == second.angle)
+	{
+		// 远离极点方向。
+		if (second.distance &gt;= first.distance)
+			possible[solutions++] = (point){first.angle, 
+					2 * second.distance - first.distance};
+		// 靠近极点方向，可能会越过极点到相对的另一侧。
+		else
+		{
+			if (2 * second.distance &gt; first.distance)
+				possible[solutions++] = (point) {first.angle, 
+					2 * second.distance - first.distance};
+			else
+				possible[solutions++] = (point){
+				((first.angle &gt;= 180.0) ?
+					(first.angle - 180.0) :
+						(first.angle + 180.0)),
+				fabs(2 * second.distance - first.distance)};
+		}
+	}
+	// 当前后两次观察到的位置极角相差 180 度时，说明物体的运动轨迹是过极点的直线。
+	else if (fabs(first.angle - second.angle) == 180.0)
+	{
+		// 注意在第二次观察时，时间过去了 1 s，但是再下一次观察时，将是 3s。故移动距
+		// 离要增加一倍。
+		possible[solutions++] = (point){second.angle, 
+				3 * second.distance + 2 * first.distance};
+	}
+	// 当第一次和第二次的极角不同，且相差不是 180 度时，物体的运动轨迹是一条不过极点的直线。
+	else
+	{
+		// 当第二次观察位置出现在第一次的逆时针方向，则表明雷达是在一个周期的时间内观察
+		// 到两个位置。则第三次观察时只有一种可能的位置。
+		double C = 0.0, finalAngle, finalDistance, x;
+		double angleDiff = fabs(first.angle - second.angle);
+		if ((first.angle &gt; second.angle &amp;&amp; angleDiff &lt; 180.0) ||
+			(first.angle &lt; second.angle &amp;&amp; angleDiff &gt; 180.0))
+		{
+			// 二分数值法求近似解。
+			// 先求出前后两次观察位置之间的角度差，设为角 C，对应边为 c。
+			if (first.angle &lt; second.angle &amp;&amp; angleDiff &gt; 180.0)
+				C = radians(first.angle + (360.0 - second.angle));
+			else
+				C = radians(first.angle - second.angle);
+
+			// 不失一般性，设第一次观察的位置距离为 a，第二次观察的距离为 b，可
+			// 由正弦和余弦定理求出边 b 对应的角 B。先求边 c。
+			double a = first.distance, b = second.distance;
+			double c = sqrt(a * a + b * b - 2.0 * a * b * cos(C));
+			double B = asin(sin(C) * b / c);
+
+			x = bisection(b, c, B, C, COUNTER_CLOCKWISE);
+			finalAngle = second.angle - degrees(x);
+			if (finalAngle &lt; 0.0)
+				finalAngle += 360.0;
+			finalDistance = b * sin(B + C) / sin(B + C + x);
+			possible[solutions++] = (point){finalAngle, finalDistance};
+		}
+		// 第二个位置在第一个位置的顺时针方向，有两种可能，一种是在观察到第一个位置后的
+		// 同一个扫描周期内观察到第二个位置，另外一种情况是在下一个扫描周期内观察到第二
+		// 个位置。故有两种可能解。
+		else
+		{
+			if (first.angle &gt; second.angle &amp;&amp; angleDiff &gt; 180.0)
+				C = radians(second.angle + (360.0 - first.angle));
+			else
+				C = radians(second.angle - first.angle);
+
+			double a = first.distance, b = second.distance;
+			double c = sqrt(a * a + b * b - 2.0 * a * b * cos(C));
+			double B = asin(sin(C) * b / c);
+
+			
+			// 计算所有可能性。
+			for (int i = CLOCKWISE_SAME_SAME_CYCLE; 
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; i &lt;= CLOCKWISE_NEXT_NEXT_CYCLE; i++)
+			{
+				x = bisection(b, c, B, C, i);
+				if (x == 0.0)
+					continue;
+				finalAngle = second.angle + degrees(x);
+				if (finalAngle &gt;= 360.0)
+					finalAngle -= 360.0;
+				finalDistance = b * sin(B + C) / sin(B + C + x);
+				possible[solutions++] = (point){finalAngle, finalDistance};
+			}
+
+			// 判断那些解是有效解。
+			// 检查计算结果是否满足物体的速度限制要求。若存在则有矛盾，该组结果丢弃。
+			// 假设物体速度为 c / （C / PI），即在转过 C 角度的时间，物体运动距离
+			// 为 c，计算第二次观察结果，若结果符合，则第一组结果有效，第二组结果
+			// 无效，否则相反。
+
+
+			// 物体速度为 c / （C / PI + 2.0），计算第二次观察结果，若符合则
+			// 第三组结果有效，否则无效。
+		}
+	}
+
+	// 按极角和距离排序。
+	bool blank = false;
+	sort(possible, possible + solutions, cmp);
+	for (int i = 0; i &lt; solutions; i++)
+	{
+		if (possible[i].distance == 0)
+			continue;
+		cout &lt;&lt; (blank ? &quot; &quot; : &quot;&quot;);
+		blank = true;
+		cout &lt;&lt; possible[i].angle &lt;&lt; &quot; &quot; &lt;&lt; possible[i].distance;
+	}
+	cout &lt;&lt; endl;
+}
+
+int main (int argc, char const* argv[])
+{
+	cout.precision(2);
+	cout.setf(ios::fixed | ios::showpoint);
+
+	point first, second;
+	while (cin &gt;&gt; first.angle &gt;&gt; first.distance &gt;&gt; second.angle &gt;&gt; second.distance)
+		possibleSolutions(first, second);
+
+	return 0;
+}</pre><br>
+<br>
+
+</div>
+
+<div class="share_buttons" id="sharePanel"></div>
+<!--192.168.100.34-->
+<div class="article_next_prev">
+    <li class="prev_article"><span>上一篇：</span><a href="6978995.html">UVa Problem 10065 Useless Tile Packers （没用的瓷砖打包公司）</a></li>
+    <li class="next_article"><span>下一篇：</span><a href="6979019.html">UVa Problem 10088 Trees on My Island （岛上的树）</a></li>
+</div>
+
+
+            <div id="digg" ArticleId="6979016">
+            <dl id="btnDigg" class="digg digg_disable">
+                <dt>顶</dt>
+                <dd>1</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+                <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+</div>
+<div id="ad_cen">
+<script type="text/javascript" >BAIDU_CLB_SLOT_ID = "117306";</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>
+</div>
+<script type="text/javascript">
+    //new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"></div>
+<div id="comment_bar"></div>
+<div id="comment_form"></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '6979016';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+<div id="ad_bot"></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+<div id="d-top" style="display:none;">
+<a id="d-top-a" href="6979016.html#" title="回到顶部">
+<img src="http://static.blog.csdn.net/images/top.png" alt="TOP" /></a>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var d_top=$('#d-top');
+        document.onscroll=function(){
+            var scrTop=(document.body.scrollTop||document.documentElement.scrollTop);
+            if(scrTop>500){
+                d_top.show();
+            }else{
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function(){
+            scrollTo(0,0);
+            this.blur();
+            return false;
+        });
+    });
+</script>
+
+<div class="clear"></div>
+</div>
+</div>
+
+<div id="side">
+<div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/metaphysis" target="_blank">
+    <img src="http://avatar.csdn.net/7/5/C/1_metaphysis.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/metaphysis" class="user_name" target="_blank">metaphysis</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]"></a>
+</div>
+<div id="blog_medal">
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>118064次</span></li>
+    <li>积分：<span>2991分</span></li>
+    <li>排名：<span>第2304名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>145篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>150条</span></li>
+</ul>
+</ul>
+</div>
+
+<div class="panel">
+<ul class="panel_body" style="padding:0;">
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script> 
+<script type="text/javascript"> 
+BAIDU_CLB_preloadSlots("724643","117306"); 
+</script>
+<script type="text/javascript">BAIDU_CLB_fillSlot("724643");</script> 
+</ul>
+</div>
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="submit" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825017">入门</a><span>(16)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/833251">回溯法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825019">字符串</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825020">排序</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825018">数据结构</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/831168">数论</a><span>(10)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828006">算术与代数</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828459">组合数学</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/861876">日常应用</a><span>(3)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/894878">图遍历</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895070">图算法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a><span>(14)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895072">网格</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895073">几何</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895074">计算几何</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895619">算法总结</a><span>(3)</span>
+</li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="http://blog.csdn.net/metaphysis/article/month/2013/05">2013年05月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2013/04">2013年04月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/12">2011年12月</a><span>(13)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/11">2011年11月</a><span>(34)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/10">2011年10月</a><span>(24)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/09">2011年09月</a><span>(6)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/07">2011年07月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/06">2011年06月</a><span>(17)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/05">2011年05月</a><span>(42)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head"><span>阅读排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(9824)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(3624)</span>
+</li>
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(3251)</span>
+</li>
+<li>
+<a href="6885767.html" title="Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11">Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11</a><span>(3137)</span>
+</li>
+<li>
+<a href="6560047.html" title="UVa Problem 10181 15-Puzzle Problem （15 数码游戏）">UVa Problem 10181 15-Puzzle Problem （15 数码游戏）</a><span>(1989)</span>
+</li>
+<li>
+<a href="6668040.html" title="Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法">Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法</a><span>(1965)</span>
+</li>
+<li>
+<a href="6860405.html" title="UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）">UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）</a><span>(1507)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(1475)</span>
+</li>
+<li>
+<a href="6877397.html" title="UVa Problem 10261 Ferry Loading （渡船装载）">UVa Problem 10261 Ferry Loading （渡船装载）</a><span>(1367)</span>
+</li>
+<li>
+<a href="6953949.html" title="UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）">UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）</a><span>(1281)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend"></ul>
+</div>
+<script type="text/javascript">
+ new Ad(12, 'ad_commend');
+</script><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u010537978" class="user_name">u010537978</a>:
+天外有天，人外有人！一个不是搞计算机算法的人能写出如此程序与我们分享,感谢！与惭愧！
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:刚才自己测试了下，确实 16 块就可以了。我已经在程序中做了修正。
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:哦？！您能在回复里面给出具体的拆分方案吗？
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/vania" class="user_name">vania</a>:
+如果我的代码没算错的话，n = 47时用16块小方块也可以拼出来。而且我用我的16块的方案在uva上...
+    </p>
+    </li>
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/kisstears" class="user_name">kisstears</a>:
+楼主这都是你自己写的啊？厉害
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@u011044487:你能详细描述一下你的算法过程吗？看代码有点乱。
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011044487" class="user_name">u011044487</a>:
+博主，我用的好像是DFS，但老是WA。能否帮我看一下。http://vdisk.weibo.com/...
+    </p>
+    </li>
+    <li>
+    <a href="8775269.html#comments">“No mapping for the Unicode character exists in the target multi-byte code page” 错误解决方法</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/acrodelphi" class="user_name">acrodelphi</a>:
+客户端修改：使用FileZilla免费的FTP客户端软件，把“站点属性-字符集”，修改为“强制UTF...
+    </p>
+    </li>
+    <li>
+    <a href="6432193.html#comments">UVa Problem 843 Crypt Kicker （解密）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/zeroalex" class="user_name">zeroalex</a>:
+我参考您的自己写了个代码可还是wa可以请你帮我看一下问题吗...
+    </p>
+    </li>
+    <li>
+    <a href="6431937.html#comments">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011377352" class="user_name">u011377352</a>:
+@u011377352:好了我明白了i，j按原来顺序输出额
+    </p>
+    </li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(18)</span>
+</li>
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432062.html" title="UVa Problem 10137 The Trip （旅行）">UVa Problem 10137 The Trip （旅行）</a><span>(12)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(7)</span>
+</li>
+<li>
+<a href="6432094.html" title="UVa Problem 10196 Check the Check （将军）">UVa Problem 10196 Check the Check （将军）</a><span>(7)</span>
+</li>
+<li>
+<a href="6939857.html" title="UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）">UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）</a><span>(6)</span>
+</li>
+<li>
+<a href="6453207.html" title="UVa Problem 10202 Pairsumonious Numbers （两两之和）">UVa Problem 10202 Pairsumonious Numbers （两两之和）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432193.html" title="UVa Problem 843 Crypt Kicker （解密）">UVa Problem 843 Crypt Kicker （解密）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432247.html" title="UVa Problem 10044 Erdos Numbers （Erdos 数）">UVa Problem 10044 Erdos Numbers （Erdos 数）</a><span>(5)</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js?v=1.1"></script>
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=75031"></script>
+
+<script type="text/javascript">
+document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js?v=1"></script>
+
+
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+
+<script type="text/javascript" src="http://zz.csdn.net/js/count.js"></script>
+
+</div>
+</body>
+</html>

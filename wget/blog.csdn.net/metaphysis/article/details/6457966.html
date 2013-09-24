@@ -1,0 +1,850 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>UVa Problem 10213 How Many Pieces of Land? （土地分割） - 寂静山林 - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="// How Many Pieces of Land? （土地分割）// PC/UVa IDs: 110602/10213, Popularity: B, Success rate: average Level: 2// Verdict: Accepted// Submis" />
+<script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+<link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/ink/css/style.css?v=1.1" />
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/metaphysis/rss/list" />
+<link rel="shortcut icon" href="../../../favicon.ico" />
+<link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+</head>
+<body>
+<script src="http://csdnimg.cn/pubnav/js/pub_topnav_2011.js"type="text/javascript"></script>
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1><a href="http://blog.csdn.net/metaphysis">寂静山林</a></h1>
+            <h2></h2>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg"></div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="http://blog.csdn.net/metaphysis?viewmode=contents"><span><img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/metaphysis?viewmode=list"><span><img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/metaphysis/rss/list"><span><img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "metaphysis";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/metaphysis";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";
+</script>
+
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/9819385" target="_blank">
+<font color=red>《这些年，我们读过的技术经典图书》主题有奖征文</font></a>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://www.csdn.net/article/2013-08-06/2816471" target="_blank"><font color=blue>专访李铁军：从医生到金山首席安全专家的转变 
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<a href="http://blog.csdn.net/adali/article/details/9813651"target="_blank">
+<font color=blue>独一无二的职位：开源社区经理 
+ </font></a>
+
+
+
+
+</div>
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="6457966.html">
+        UVa Problem 10213 How Many Pieces of Land? （土地分割）
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/metaphysis/article/category/828459">组合数学</a> 
+        </span>
+    <span class="link_postdate">2011-05-31 13:26</span>
+    <span class="link_view" title="阅读次数">625人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="6457966.html#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('UVa Problem 10213 How Many Pieces of Land? （土地分割）','6457966');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="6457966.html#report"  onclick="javascript:report(6457966,2);return false;" title="举报">举报</a></span>
+    
+</div>
+
+
+    
+<div id="article_content" class="article_content">
+
+<pre name="code" class="cpp">// How Many Pieces of Land? （土地分割）
+// PC/UVa IDs: 110602/10213, Popularity: B, Success rate: average Level: 2
+// Verdict: Accepted
+// Submission Date: 2011-06-01
+// UVa Run Time: 0.888s
+//
+// 版权所有（C）2011，邱秋。metaphysis # yeah dot net
+//
+// 一个圆被圆上 n 个点的连线所划分，能得到的最大区域数是 1 + C(n, 2) + C(n, 4)。具体可参见
+// 维基网页 http://en.wikipedia.org/wiki/Dividing_a_circle_into_areas ，以及
+// http://www.arbelos.co.uk/Papers/Chords-regions.pdf 。实际上是大数的四则运算问题。
+// 以下实现了一个大数的四则运算，使用 STL 中的 vector 来表示大数的数位，数位用数位的值表示。
+// 将字符串或int型表示的大数转换为动态数组表示的大数，并实现比较、加、减、乘、除、幂运算，
+// 除法是整除，对余数未确切定义，可以进一步完善，处理一些异常情况使得能够更加通用。为了解题
+// 方便，在重载操作符的时候使用了传值方式，若要传引用，需要注意在计算时还原相应操作数的符
+// 号位。
+	
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+	
+using namespace std;
+	
+#define PLUS 	1	// 正数。
+#define MINUS 	-1	// 负数。
+	
+// 大数类。
+class integer
+{
+	friend ostream&amp; operator&lt;&lt;(ostream&amp;, const integer&amp;);
+	friend istream&amp; operator&gt;&gt;(istream&amp;, integer&amp;);
+	
+	friend int compare(const integer, const integer);
+	friend bool operator&lt;(const integer, const integer);
+	friend bool operator&lt;=(const integer, const integer);
+	
+	friend integer operator&lt;&lt;(integer, int);
+	
+	friend integer operator+(integer, integer);
+	friend integer operator-(integer, integer);
+	friend integer operator*(integer, integer);
+	friend integer operator/(integer, integer);
+	friend integer operator^(integer, int);
+	
+public:
+	integer() { };
+	
+	integer(int a)
+	{
+		signbit = (a &gt;= 0 ? PLUS : MINUS);
+		a = abs(a);
+		while (a)
+		{
+			digits.push_back(a % 10);
+			a /= 10;
+		}
+	};
+	
+	~integer() { };
+	
+	void zero_justify(void);
+	
+private:
+	// 表示大数的结构。数位按低位到高位的顺序存放。存储的是数位值，而不是数位的字符值。
+	// 数字 1 用 ASCII 码为 1 的字符，而不是 ‘1’ 来表示。
+	vector &lt; char &gt; digits;	// 存放数位值。
+	int signbit;		// 符号位。
+};
+	
+integer operator+(integer, integer);
+integer operator-(integer, integer);
+	
+// 重载输出符号&lt;&lt;。
+ostream&amp; operator&lt;&lt;(ostream&amp; os, const integer&amp; n)
+{
+	// 当为自然数时，不输出“+”号。
+	os &lt;&lt; (n.signbit &gt; 0 ? &quot;&quot; : &quot;-&quot;);
+	for (int i = n.digits.size() - 1; i &gt;= 0; i--)
+		// 存放的是数位值，输出时要转换为数位的字符值。
+		os &lt;&lt; (char)('0' + n.digits[i]);
+	return os;
+}
+	
+// 重载输入符号&gt;&gt;。
+istream&amp; operator&gt;&gt;(istream&amp; in, integer&amp; n)
+{
+	// 读入表示大整数的字符串。
+	string s;
+	in &gt;&gt; s;
+	
+	if (s.length() == 0)
+	{
+		// 若长度为0，表示读入的是一个空字符串，应该要给予错误提示，但对于本题来说，不
+		// 存在这种情况，故不考虑。若要完善，需要进一步处理此种情况。
+	}
+	
+	// 在解析之前，理应判断该字符串是否是一个合法的大数表示，即开始一位为符号位，为“+”或
+	// “-”，正整数“+”可以忽略，后面应该全部是数字字符，且不包含前导0。由于本题不存在此种情
+	// 况，故不考虑，若要完善需进一步处理此种情况。
+	
+	// 解析符号位。
+	if (isdigit(s[0]))
+		n.signbit = PLUS;
+	else
+	{
+		n.signbit = (s[0] == '+' ? PLUS : MINUS);
+		s.erase(s.begin());
+	}
+	
+	// 解析数字位，从低位到高位存放于动态数组中。
+	n.digits.clear();
+	for (int i = s.length() - 1; i &gt;= 0; i--)
+		n.digits.push_back((char)(s[i] - '0'));
+	
+	return in;
+}
+	
+// 移除大数运算产生的前导0。
+void integer::zero_justify(void)
+{
+	for (int i = digits.size() - 1; i &gt;= 1; i--)
+		if (digits[i] == 0)
+			digits.erase(digits.begin() + i);
+		else
+			break;
+	
+	if (digits.size() == 1 &amp;&amp; digits[0] == 0)
+		signbit = PLUS;
+}
+	
+// 比较两个数的大小，若相等，返回 0，若 a 大于 b，返回 1，若 a 小于 b，返回 -1。
+int compare(const integer a, const integer b)
+{
+	// 若 a 为正，b 为负，则有 a 大于 b。
+	if (a.signbit == PLUS &amp;&amp; b.signbit == MINUS)
+		return PLUS;
+	
+	// 若 a 为负，b 为正，则 a 小于 b。
+	if (a.signbit == MINUS &amp;&amp; b.signbit == PLUS)
+		return MINUS;
+	
+	// 若两数符号相同，则 a 的数位长度大于 b 的数位长度，若 a 为正数，则有 a 大于 b，若 a
+	// 为负数，有 a 小于 b，则将 a 的符号位乘以1作为结果返回即可。  
+	if (a.digits.size() &gt; b.digits.size())
+		return PLUS * a.signbit;
+	
+	// 若两数符号相同，若a的数位长度小于b的数位长度，若 a 为正数，则 a 小于 b，若 a 为负数，
+	// 则 a 大于 b，则将 a 的符号位乘以 -1 作为结果返回即可。    
+	if (a.digits.size() &lt; b.digits.size())
+		return MINUS * a.signbit;
+	
+	// 两个数的数位长度相等，符号相等，则从低位到高位逐个比较数位值的大小。
+	int marker = a.digits.size() - 1;
+	while (marker &gt;= 0)
+	{
+		if (a.digits[marker] &gt; b.digits[marker])
+			return PLUS * a.signbit;
+
+		if (a.digits[marker] &lt; b.digits[marker])
+			return MINUS * a.signbit;
+
+		marker--;
+	}
+	
+	return 0;
+}
+	
+// 小于比较符。
+bool operator&lt;(const integer a, const integer b)
+{
+	return compare(a, b) &lt; 0;
+}
+	
+// 小于等于比较符。
+bool operator&lt;=(const integer a, const integer b)
+{
+	return compare(a, b) &lt;= 0;
+}
+	
+// 左移操作。b 表示左移的位数。即将 a 乘以 10^b。
+integer operator&lt;&lt;(integer a, int b)
+{
+	integer c = a;
+	
+	// 若 a 等于 0，则移位后仍为 0。
+	if (a.digits.size() == 1 &amp;&amp; a.digits[0] == 0)
+		return c;
+
+	// 向左移动 b 位，相当于在数位数组前插入 b 个 0。
+	for (int i = 0; i &lt; b; i++)
+		c.digits.insert(c.digits.begin(), (char)(0));
+	
+	return c;
+}
+	
+// 加法运算。从低位往高位进行，每一位相加产生的进位向高位传递，注意负数的处理，可以相应的
+// 转变为减法来简化操作。
+integer operator+(integer a, integer b)
+{
+	integer c;
+	
+	// 两数符号位相等，则最终符号位和原来的加数符号位相同。
+	if (a.signbit == b.signbit)
+		c.signbit = a.signbit;
+	else
+	{
+		// 若两个加数为一正一负，则将其转换为减法操作。
+		if (a.signbit == MINUS)
+		{
+			a.signbit = PLUS;
+			c = b - a;
+		}
+		else
+		{
+			b.signbit = PLUS;
+			c = a - b;
+		}
+
+		return c;
+	}
+	
+	// 从动态数组的开始即低位开始相加，逐渐往前进位，如果有的话。
+	int carry = 0;		// 进位。
+	int maxsize = max(a.digits.size(), b.digits.size());
+	int marker = 0;
+	
+	// 为两数添加前导 0，以使得数位相同，便于计算。
+	while (a.digits.size() &lt; maxsize)
+		a.digits.push_back(char(0));
+	while (b.digits.size() &lt; maxsize)
+		b.digits.push_back(char(0));
+		
+	// 逐位相加。
+	while (marker &lt; maxsize)
+	{
+		int t = a.digits[marker] + b.digits[marker] + carry;
+		carry = t / 10;
+		c.digits.push_back((char)(t % 10));
+
+		marker++;
+	}
+	
+	// 若最后一次进位为 1，则需在最高位加 1。
+	if (carry)
+		c.digits.push_back((char)(1));
+	
+	c.zero_justify();
+	
+	return c;
+}
+	
+// 减法。为了保证借位能够成功终止，最好确保被减数不小于减数。同样可以在适当情况转变为加法来简化操作。
+integer operator-(integer a, integer b)
+{
+	integer c;
+	
+	// 当某一个数为负数时，转换为加法。
+	if (a.signbit == MINUS || b.signbit == MINUS)
+	{
+		b.signbit = MINUS * b.signbit;
+		c = a + b;
+
+		return c;
+	}
+	
+	// 两个都为正数，若 a &lt; b，则尽量保证被减数大于减数。
+	if (a &lt; b)
+	{
+		c = b - a;
+		c.signbit = MINUS;
+
+		return c;
+	}
+	else
+		c.signbit = PLUS;
+	
+	int borrow = 0;		// 借位。
+	int maxsize = a.digits.size();	// 被减数大于减数。
+	int marker = 0;		// 计数器。
+	
+	// 为减数添加前导 0，便于计算。因为先前已经使得 a &gt; b 且 a 和 b 均为正数。
+	while (b.digits.size() &lt; maxsize)
+		b.digits.push_back(char(0));
+
+	// 从低位开始逐位相减，不够的向高位借位。
+	while (marker &lt; maxsize)
+	{
+		int v = a.digits[marker] - borrow - b.digits[marker];
+		if (v &lt; 0)
+		{
+			v += 10;
+			borrow = 1;
+		}
+		else
+			borrow = 0;
+	
+		c.digits.push_back((char)(v % 10));
+	
+		marker++;
+	}
+	
+	c.zero_justify();
+	
+	return c;
+}
+	
+// 乘法，采用一行一行算的方法比单纯的反复加法更快且编写代码不会变复杂许多。每次操作都把第一个
+// 乘数左移一个数位，然后把左移后的数乘以x的积加到最终结果中，其中x是第二个乘数对应的数字。尽
+// 管用反复加法来实现这一步看起来不够精巧，但由于对于第二个乘数的每个数字，内层循环最多执行 9
+// 次，实际上并没有浪费太多的时间，左移一个数位等价于用它乘以进位制的基数，在十进制里就是乘以 10。
+integer operator*(integer a, integer b)
+{
+	integer c = integer(0), row = a;
+	row.signbit = PLUS;
+	
+	for (int i = 0; i &lt; b.digits.size(); i++)
+	{
+		for (int j = 0; j &lt; b.digits[i]; j++)
+			c = (c + row);
+
+		row = row &lt;&lt; 1;
+	}
+	
+	c.signbit = a.signbit * b.signbit;
+	c.zero_justify();
+
+	return c;
+}
+	
+// 除法运算。将余数和商不断左移，余数加上被除数的下一个数字，然后尝试减去除数。
+integer operator/(integer a, integer b)
+{
+	integer c, row;
+	row.signbit = PLUS;
+
+	// 商的符号为 a 的符号乘以 b 的符号。
+	c.signbit = a.signbit * b.signbit;
+ 	
+	int v;
+	// 从数a的最高位开始除。
+	for (int i = a.digits.size() - 1; i &gt;= 0; i--)
+	{
+		row = row &lt;&lt; 1;
+		row.digits[0] = a.digits[i];
+
+		// 当除数小于被除数，减去除数，对应位的商增 1。
+		v = 0;
+		while (b &lt;= row)
+		{
+			v++;
+			row = row - b;
+		}
+ 	
+		// 将商左移 1 位，刚得到的商即为最低位。
+		c = c &lt;&lt; 1;
+		c.digits[0] = (char)(v);
+	}
+ 	
+	c.zero_justify();
+ 	
+	return c;
+}
+ 	
+// 幂计算。幂就是反复作乘法，利用：a^n = a^(n / 2) * a^(n / 2) * a^(n mod 2)，可以减少乘
+// 的次数。
+integer operator^(integer a, int b)
+{
+	if (b == 0)
+		return integer(1);
+ 	
+	if (b == 1)
+		return a;
+ 	
+	if (b == 2)
+		return a * a;
+ 	
+	return ((a ^ (b / 2)) ^ 2) * (a ^ (b % 2));
+}
+	
+int main(int ac, char *av[])
+{
+	int cases;
+	integer a;
+ 	
+	cin &gt;&gt; cases;
+	while (cases--)
+	{
+		cin &gt;&gt; a;
+ 	
+		cout &lt;&lt; ((a ^ 4) - integer(6) * (a ^ 3) +
+			integer(23) * (a ^ 2) - integer(18) * a +
+			integer(24)) / integer(24) &lt;&lt; endl;
+	}
+ 	
+	return 0;
+}</pre><br>
+<br>
+
+</div>
+
+<div class="share_buttons" id="sharePanel"></div>
+<!--192.168.100.34-->
+<div class="article_next_prev">
+    <li class="next_article"><span>下一篇：</span><a href="6431937.html">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a></li>
+</div>
+
+
+            <div id="digg" ArticleId="6457966">
+            <dl id="btnDigg" class="digg digg_disable">
+                <dt>顶</dt>
+                <dd>8</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+                <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+</div>
+<div id="ad_cen">
+<script type="text/javascript" >BAIDU_CLB_SLOT_ID = "117306";</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>
+</div>
+<script type="text/javascript">
+    //new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"></div>
+<div id="comment_bar"></div>
+<div id="comment_form"></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '6457966';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+<div id="ad_bot"></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+<div id="d-top" style="display:none;">
+<a id="d-top-a" href="6457966.html#" title="回到顶部">
+<img src="http://static.blog.csdn.net/images/top.png" alt="TOP" /></a>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var d_top=$('#d-top');
+        document.onscroll=function(){
+            var scrTop=(document.body.scrollTop||document.documentElement.scrollTop);
+            if(scrTop>500){
+                d_top.show();
+            }else{
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function(){
+            scrollTo(0,0);
+            this.blur();
+            return false;
+        });
+    });
+</script>
+
+<div class="clear"></div>
+</div>
+</div>
+
+<div id="side">
+<div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/metaphysis" target="_blank">
+    <img src="http://avatar.csdn.net/7/5/C/1_metaphysis.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/metaphysis" class="user_name" target="_blank">metaphysis</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]"></a>
+</div>
+<div id="blog_medal">
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>118064次</span></li>
+    <li>积分：<span>2991分</span></li>
+    <li>排名：<span>第2304名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>145篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>150条</span></li>
+</ul>
+</ul>
+</div>
+
+<div class="panel">
+<ul class="panel_body" style="padding:0;">
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script> 
+<script type="text/javascript"> 
+BAIDU_CLB_preloadSlots("724643","117306"); 
+</script>
+<script type="text/javascript">BAIDU_CLB_fillSlot("724643");</script> 
+</ul>
+</div>
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="submit" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825017">入门</a><span>(16)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/833251">回溯法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825019">字符串</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825020">排序</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825018">数据结构</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/831168">数论</a><span>(10)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828006">算术与代数</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828459">组合数学</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/861876">日常应用</a><span>(3)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/894878">图遍历</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895070">图算法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a><span>(14)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895072">网格</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895073">几何</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895074">计算几何</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895619">算法总结</a><span>(3)</span>
+</li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="http://blog.csdn.net/metaphysis/article/month/2013/05">2013年05月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2013/04">2013年04月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/12">2011年12月</a><span>(13)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/11">2011年11月</a><span>(34)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/10">2011年10月</a><span>(24)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/09">2011年09月</a><span>(6)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/07">2011年07月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/06">2011年06月</a><span>(17)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/05">2011年05月</a><span>(42)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head"><span>阅读排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(9824)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(3624)</span>
+</li>
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(3251)</span>
+</li>
+<li>
+<a href="6885767.html" title="Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11">Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11</a><span>(3137)</span>
+</li>
+<li>
+<a href="6560047.html" title="UVa Problem 10181 15-Puzzle Problem （15 数码游戏）">UVa Problem 10181 15-Puzzle Problem （15 数码游戏）</a><span>(1989)</span>
+</li>
+<li>
+<a href="6668040.html" title="Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法">Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法</a><span>(1965)</span>
+</li>
+<li>
+<a href="6860405.html" title="UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）">UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）</a><span>(1507)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(1475)</span>
+</li>
+<li>
+<a href="6877397.html" title="UVa Problem 10261 Ferry Loading （渡船装载）">UVa Problem 10261 Ferry Loading （渡船装载）</a><span>(1367)</span>
+</li>
+<li>
+<a href="6953949.html" title="UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）">UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）</a><span>(1281)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend"></ul>
+</div>
+<script type="text/javascript">
+ new Ad(12, 'ad_commend');
+</script><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u010537978" class="user_name">u010537978</a>:
+天外有天，人外有人！一个不是搞计算机算法的人能写出如此程序与我们分享,感谢！与惭愧！
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:刚才自己测试了下，确实 16 块就可以了。我已经在程序中做了修正。
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:哦？！您能在回复里面给出具体的拆分方案吗？
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/vania" class="user_name">vania</a>:
+如果我的代码没算错的话，n = 47时用16块小方块也可以拼出来。而且我用我的16块的方案在uva上...
+    </p>
+    </li>
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/kisstears" class="user_name">kisstears</a>:
+楼主这都是你自己写的啊？厉害
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@u011044487:你能详细描述一下你的算法过程吗？看代码有点乱。
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011044487" class="user_name">u011044487</a>:
+博主，我用的好像是DFS，但老是WA。能否帮我看一下。http://vdisk.weibo.com/...
+    </p>
+    </li>
+    <li>
+    <a href="8775269.html#comments">“No mapping for the Unicode character exists in the target multi-byte code page” 错误解决方法</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/acrodelphi" class="user_name">acrodelphi</a>:
+客户端修改：使用FileZilla免费的FTP客户端软件，把“站点属性-字符集”，修改为“强制UTF...
+    </p>
+    </li>
+    <li>
+    <a href="6432193.html#comments">UVa Problem 843 Crypt Kicker （解密）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/zeroalex" class="user_name">zeroalex</a>:
+我参考您的自己写了个代码可还是wa可以请你帮我看一下问题吗...
+    </p>
+    </li>
+    <li>
+    <a href="6431937.html#comments">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011377352" class="user_name">u011377352</a>:
+@u011377352:好了我明白了i，j按原来顺序输出额
+    </p>
+    </li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(18)</span>
+</li>
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432062.html" title="UVa Problem 10137 The Trip （旅行）">UVa Problem 10137 The Trip （旅行）</a><span>(12)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(7)</span>
+</li>
+<li>
+<a href="6432094.html" title="UVa Problem 10196 Check the Check （将军）">UVa Problem 10196 Check the Check （将军）</a><span>(7)</span>
+</li>
+<li>
+<a href="6939857.html" title="UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）">UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）</a><span>(6)</span>
+</li>
+<li>
+<a href="6453207.html" title="UVa Problem 10202 Pairsumonious Numbers （两两之和）">UVa Problem 10202 Pairsumonious Numbers （两两之和）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432193.html" title="UVa Problem 843 Crypt Kicker （解密）">UVa Problem 843 Crypt Kicker （解密）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432247.html" title="UVa Problem 10044 Erdos Numbers （Erdos 数）">UVa Problem 10044 Erdos Numbers （Erdos 数）</a><span>(5)</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js?v=1.1"></script>
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=75031"></script>
+
+<script type="text/javascript">
+document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js?v=1"></script>
+
+
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+
+<script type="text/javascript" src="http://zz.csdn.net/js/count.js"></script>
+
+</div>
+</body>
+</html>

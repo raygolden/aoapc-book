@@ -1,0 +1,738 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>UVa Problem 861 Little Bishops （棋盘上的象） - 寂静山林 - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="// Little Bishops （棋盘上的象）// PC/UVa IDs: 110801/861, Popularity: C, Success rate: high Level: 2// Verdict: Accepted // Submission Date: 2011-06-19// UVa Run Time: 0.024s//// 版权所有（C）2011，邱秋。meta" />
+<script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+<link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/ink/css/style.css?v=1.1" />
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/metaphysis/rss/list" />
+<link rel="shortcut icon" href="../../../favicon.ico" />
+<link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+</head>
+<body>
+<script src="http://csdnimg.cn/pubnav/js/pub_topnav_2011.js"type="text/javascript"></script>
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1><a href="http://blog.csdn.net/metaphysis">寂静山林</a></h1>
+            <h2></h2>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg"></div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="http://blog.csdn.net/metaphysis?viewmode=contents"><span><img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/metaphysis?viewmode=list"><span><img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/metaphysis/rss/list"><span><img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "metaphysis";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/metaphysis";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";
+</script>
+
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/9819385" target="_blank">
+<font color=red>《这些年，我们读过的技术经典图书》主题有奖征文</font></a>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://www.csdn.net/article/2013-08-06/2816471" target="_blank"><font color=blue>专访李铁军：从医生到金山首席安全专家的转变 
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<a href="http://blog.csdn.net/adali/article/details/9813651"target="_blank">
+<font color=blue>独一无二的职位：开源社区经理 
+ </font></a>
+
+
+
+
+</div>
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="6553011.html">
+        UVa Problem 861 Little Bishops （棋盘上的象）
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/metaphysis/article/category/833251">回溯法</a> 
+        </span>
+    <span class="link_postdate">2011-06-18 09:44</span>
+    <span class="link_view" title="阅读次数">1270人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="6553011.html#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('UVa Problem 861 Little Bishops （棋盘上的象）','6553011');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="6553011.html#report"  onclick="javascript:report(6553011,2);return false;" title="举报">举报</a></span>
+    
+</div>
+<div class="tag2box"><a href='http://blog.csdn.net/tag/details.html?tag=c' target=_blank>c</a><a href='http://blog.csdn.net/tag/details.html?tag=date' target=_blank>date</a><a href='http://blog.csdn.net/tag/details.html?tag=%e5%ad%98%e5%82%a8' target=_blank>存储</a></div>
+
+
+    
+<div id="article_content" class="article_content">
+
+<pre name="code" class="cpp">// Little Bishops （棋盘上的象）
+// PC/UVa IDs: 110801/861, Popularity: C, Success rate: high Level: 2
+// Verdict: Accepted 
+// Submission Date: 2011-06-19
+// UVa Run Time: 0.024s
+//
+// 版权所有（C）2011，邱秋。metaphysis # yeah dot net
+//
+// n * n 的棋盘可以最多放置多少个象而不互相冲突？我是这样考虑的，因为象的吃子方式为
+// 对角线吃子，则在棋盘上放置一个象后，它要么占据一条对角线，要么占据两条。当然先放置
+// 占据一条对角线的象，可以将放置象的数量最大化，在棋盘的主、副主对角线上各放置一个
+// 象，则象的总数目为 2，这样，主、副对角线将棋盘区域划分为四个等同的区域，无论在哪
+// 个区域放置象，都因为棋盘的对称性会产生相同的效果，故只考虑一个区域的放置方法，然后
+// 通过对称来求得总的放置数目。假设一个 8 * 8 的棋盘，已经在主、副对角线各放置了一个
+// 象，已占据的位置用 * 号表示，未占据的位置用大写字母 O 表示。
+//
+//   1 2 3 4 5 6 7 8
+// 1 B O-O-O-O-O-O B
+// 2 O * O-O-O-O * O
+// 3 O#O * O-O * O&amp;O
+// 4 O#O#O * * O&amp;O&amp;O
+// 5 O#O#O * * O&amp;O&amp;O
+// 6 O#O * O+O * O&amp;O
+// 7 O * O+O+O+O * O
+// 8 * O+O+O+O+O+O *
+//
+// 如上图所示，有 - 符号连接的未占据位置和 + 符号连接的未占据位置，坐标 (1, 1) 和
+// 坐标 (8, 1) 已经放置了象。先考虑 - 符号连接的区域，在此区域内，任意选一个位置放置
+// 象将占据两条对角线（非主、副对角线），而且在此区域任意放置象，必将导致左右两个可以
+// 放置象的区域被占据而不能再放置象（即有 # 符号和 &amp; 符号的区域），则在有 - 符号的区
+// 域所能放置的象的数目是由对角线的交叉点数目所确定的，即最多能再放置 6 个象而不互相
+// 冲突，则总共能放置的象数目为 8 个，棋盘状态变为以下状态：
+//
+//   1 2 3 4 5 6 7 8
+// 1 B B B B B B B B
+// 2 * * * * * * * *
+// 3 * * * * * * * *
+// 4 * * * * * * * *
+// 5 * * * * * * * *
+// 6 * * * O+O * * *
+// 7 * * O+O+O+O * *
+// 8 * O+O+O+O+O+O *
+//
+// 则对于有 + 符号的区域来说，同样可以放置 6 个象而不互相冲突。则 8 * 8 的棋盘最大
+// 可放置象的数目为 14 个。
+//
+//   1 2 3 4 5 6 7 8
+// 1 B B B B B B B B
+// 2 * * * * * * * *
+// 3 * * * * * * * *
+// 4 * * * * * * * *
+// 5 * * * * * * * *
+// 6 * * * * * * * *
+// 7 * * * * * * * *
+// 8 * B B B B B B *
+//
+// 则总结以下，n * n 的棋盘最大能放置象的数目为 n + (n - 2) 个，即 2 * (n - 1)
+// 个象，n &gt;= 2。对于 1 * 1 的棋盘来说，是特殊情况，只能放置 1 个象。那么是否可以通
+// 过组合的方法解决本题呢？答案是肯定的。国际象棋的棋盘一般都分为白色和黑色区域，在白色
+// 区域的象是无法攻击黑色区域内的象的，将黑白格子相间的棋盘顺时针旋转 45 度，则原来呈
+// 斜线的主、副对角线成为垂直和水平的了，此时象的走法和车的走法是一样的了，问题转换为在
+// 这样的 n * n 棋盘上放置 k 个车有多少种方法。假设这样的棋盘第 i 行的格子数为 r[i]，
+// 用 t[i][j] 表示在前 i 行放置 j 个车而互不冲突的方法，可以得到以下的递推关系：
+//
+// t[i][j] = t[i - 1][j] + t[i - 1][j - 1] * (r[i] - (j - 1))
+//
+// 边界条件是：
+//
+// t[i][0] = 1, 0 &lt;= i &lt;= n
+// t[0][j] = 0, 1 &lt;= j &lt;= k
+//
+// 递推关系的意义可以这样理解：因为每一行只能放置一个车，则 j 个车要么全在前 i - 1 行，
+// 要么第 i 行有一个车，j 个车全在前 i - 1 行的放置方法为 t[i - 1][j]，第 i 行放置
+// 一个车，前 i - 1 行放置 j - 1 个车，那么前 i - 1 行在放置 j - 1 个车时已经占用
+// 了第 i 行的 j - 1 个格子，剩余的格子数为 r[i] - (j - 1)，则根据乘法原理，第二种
+// 放置方法是两者的乘积，又根据加法原理，总的放置方法为第一种和第二种方法数量的和。边界
+// 情形也容易理解，前 i 行放置 0 个车的方法有 1 种，前 0 行放置 j 个车的方法有 0 种。
+// 由于将棋盘分成了两个区域，故在最后计算总的放置数时，应该是两个区域的累积。
+//
+// 那么如何通过借鉴八皇后问题通过回溯来解决本问题呢？通过观察分析，可以知道，构造候选集
+// 的方法是其中关键不同的地方，八皇后问题在构建候选集时，因为皇后不能放置在同一行和同一
+// 列，所以可以减少搜索的空间，而放置象时，象可以在同一行或者同一列，搜索的数量因此会增大
+// 不过当棋盘较少时，还是可以完成的，当棋盘进一步增大时，回溯方法就显得吃力了，需要借助
+// 组合数学的方法来计算放置方案数。在表示棋盘上的象的位置时，由于可以处于同一行或同一列
+// 故需要不同的表示方法，一个方法是将棋盘的每个格子编号，从 1 - n^2。
+//
+// /* 八皇后问题构建候选集的过程。  */
+// construct_candidates(int a[], int k, int n, int c[], int *ncandidates)
+// {
+//      int i,j;
+//      bool legal_move;
+//      
+//      *ncandidates = 0;
+//      for (i=1; i&lt;=n; i++)
+//      {
+//              legal_move = TRUE;
+//              /* 对于放置象来说，需要考虑除已有象的对角线外的每一个位置，因为不存 */
+//              /* 在像放置皇后时一行或一列只能放置一个这样的限制条件。 */
+//              for (j=1; j&lt;k; j++)
+//              {
+//                      if (abs((k)-j) == abs(i-a[j])) 
+//                      legal_move = FALSE;
+//                      
+//                      /* 对于放置象来说，并不需要检测来自行或者列的威胁，只需检 */
+//                      /* 测对角线上的威胁。*/
+//                      if (i == a[j])                  
+//                      legal_move = FALSE;
+//              }
+//              
+//              if (legal_move == TRUE) 
+//              {
+//                      c[*ncandidates] = i;
+//                      *ncandidates = *ncandidates + 1;
+//              }
+//      }
+// }
+//
+// 对于构建候选集的过程，尽管不需要考虑来自行或者列的威胁，但需要考虑除对角线外的每一个
+// 位置，且并不存在一行只能放一个象的限制条件，这是搜索时间增加的原因。如果在放置象时，
+// 不考虑位置的编号，会产生重复的放置方案，这个可以通过每次选择象时都选择比当前已选择的
+// 象的位置序号大的位置来避免。尽管采用了相应的剪枝措施，对于较大的 n 和 k 来说，仍容易
+// 得到 TLE。相对而言通过组合方法解题还是有优势的，除非用回溯法先生成给定范围内的所
+// 有解，然后填表根据具体的 n 和 k 输出，否则当 n 和 k 进一步增大，计算时间将很长。
+//
+// UVa 10237 Bishops 和本题是类似的，但是 n 和 k 已经足够大，通过回溯已经不可能在
+// 规定时间内找到答案，使用组合方法和大数运算成为必须。
+	
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+	
+using namespace std;
+	
+#define MAXN 8
+	
+long long solution_count;
+	
+void construct_candidates(int bishops[], int c, int n, int candidates[], 
+	int *ncandidates)
+{
+	bool legal_move;	// 合法放置位置的标记。
+	
+	// 对于放置象来说，需要考虑每一个位置，因为不存在像放置皇后时一行只能放置
+	// 一个的情况。只考虑比当前象的位置标记大的位置，避免重复解的生成。因为保证
+	// 了后一位置的象的编号大于前一位置象的编号，故可以从具有最大编号的象的位置
+	// 开始搜索可放置象的位置，这样可以减少搜索量。
+	int start = 0;
+	if (c)
+		start = bishops[c - 1];
+	
+	*ncandidates = 0;
+	for (int p = start; p &lt; n * n; p++)
+	{
+		legal_move = true;
+	
+		// 已放置象的对角线上不能放置。需要检查已放置象的对角线。
+		// 不满足条件，尽早退出循环。
+		for (int j = 0; j &lt; c; j++)
+			if (abs(bishops[j] / n - p / n) ==
+				abs(bishops[j] % n - p % n))
+			{
+				legal_move = false;
+				break;
+			}
+	
+		// 若该位置合法，添加到候选集中。
+		if (legal_move == true)
+			candidates[(*ncandidates)++] = p;
+	}
+}
+	
+// 回溯寻找所有可能的方案。
+void backtracking(int bishops[], int c, int n, int k)
+{
+	if (c == k)
+		solution_count++;
+	else
+	{
+		int ncandidates;
+		int candidates[MAXN * MAXN];
+			
+		// 构建候选集。
+		construct_candidates(bishops, c, n, candidates, &amp;ncandidates);
+
+		for (int i = 0; i &lt; ncandidates; i++)
+		{
+			bishops[c] = candidates[i];
+			backtracking(bishops, c + 1, n, k);
+		}
+	}
+}
+
+long long little_bishops_by_backtracking(int n, int k)
+{
+	int bishops[2 * (MAXN - 1) + 1];
+	
+	solution_count = 0;
+	backtracking(bishops, 0, n, k);
+	
+	return solution_count;
+}
+
+long long little_bishops_by_combinatorics(int n, int k)
+{
+	// 假设棋盘左上角第一个格子为白色格子。
+	long long white[9];
+	long long black[9];
+	
+	// 得到每一列白色格子的数目。格子数按从小到大排列。
+	for (int i = 1; i &lt;= n; i++)
+		white[i] = ((i % 2) ? i : white[i - 1]);
+	// 得到每一列黑色格子的数目。格子数按从小到大排列。
+	for (int i = 1; i &lt;= n - 1; i++)
+		black[i] = ((i % 2) ? (i + 1) : black[i - 1]);
+	
+	// 存储前 i 列放置 j 个象的方法。白色格子和黑色格子的放置方法数分别计算。
+	// 因为给定最多 8 * 8 的棋盘，则最大能放置象的数目为 14 个。	
+	long long white_solutions[9][15] = { {0} };
+	long long black_solutions[9][15] = { {0} };
+	// 初始化边界条件。
+	for (int i = 0; i &lt;= n; i++)
+		white_solutions[i][0] = 1;
+	for (int j = 1; j &lt;= k; j++)
+		white_solutions[0][j] = 0;
+	// 根据递推公式计算白色格子放置方案数。
+	for (int i = 1; i &lt;= n; i++)
+		for (int j = 1; j &lt;= k &amp;&amp; j &lt;= i; j++)
+			white_solutions[i][j] =
+				white_solutions[i - 1][j] + 
+				white_solutions[i - 1][j - 1] * (white[i] - j + 1);
+	// 初始化边界条件。
+	for (int i = 0; i &lt;= n - 1; i++)
+		black_solutions[i][0] = 1;
+	for (int j = 1; j &lt;= k; j++)
+		black_solutions[0][j] = 0;
+	// 根据递推公式计算黑色格子放置方案数。
+	for (int i = 1; i &lt;= n - 1; i++)
+		for (int j = 1; j &lt;= k &amp;&amp; j &lt;= i; j++)
+			black_solutions[i][j] =
+				black_solutions[i - 1][j] + 
+				black_solutions[i - 1][j - 1] * (black[i] - j + 1);
+	
+	// 统计总的放置方案数。根据乘法原理和加法原理，总的方案数等于 n * n 的棋盘
+	// n 行白色格子放置 0 个象的方案乘以 n - 1 行黑色格子放置 k 个象的方案数，
+	// 加上 n 行白色格子放置 1 个象的方案乘以 n - 1 行黑色格子放置 k - 1 个
+	// 象的方案数，加上 n 行白色格子放置 2 个象的方案乘以 n - 1 行黑色格子放
+	// 置 k - 2 个象的方案数......
+	long long total = 0;
+	for (int i = 0; i &lt;= k; i++)
+		total += white_solutions[n][i] * black_solutions[n - 1][k - i];
+	return total;
+}
+	
+long long little_bishops(int n, int k)
+{
+	// 处理特殊情况的解。
+	// k == 0，即棋盘上不放置象，只有一种方法。
+	if (k == 0)
+		return 1LL;
+	
+	// 当棋盘为 1 * 1 时，最多只能放置放置 1 个象。
+	if (n == 1)
+		return k;
+	
+	// 当 n &gt;= 2 时，由分析可知，最多只能放置 2 * (n - 1) 个象。
+	// 当大于 2 * (n - 1) 时无解。
+	if (k &gt; 2 * (n - 1))
+		return 0LL;
+	
+	// 一般情况的解。
+	//return little_bishops_by_backtracking(n, k);
+	return little_bishops_by_combinatorics(n, k);
+}
+	
+int main(int ac, char *av[])
+{
+	int n, k;
+	
+	while (cin &gt;&gt; n &gt;&gt; k, n || k)
+		cout &lt;&lt; little_bishops(n, k) &lt;&lt; endl;
+	
+	return 0;
+}</pre><br>
+<br>
+
+</div>
+
+<div class="share_buttons" id="sharePanel"></div>
+<!--192.168.100.34-->
+<div class="article_next_prev">
+    <li class="prev_article"><span>上一篇：</span><a href="6553009.html">UVa Problem 10089 Repackaging （重新打包）</a></li>
+    <li class="next_article"><span>下一篇：</span><a href="6560047.html">UVa Problem 10181 15-Puzzle Problem （15 数码游戏）</a></li>
+</div>
+
+
+            <div id="digg" ArticleId="6553011">
+            <dl id="btnDigg" class="digg digg_disable">
+                <dt>顶</dt>
+                <dd>17</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+                <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+</div>
+<div id="ad_cen">
+<script type="text/javascript" >BAIDU_CLB_SLOT_ID = "117306";</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>
+</div>
+<script type="text/javascript">
+    //new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"></div>
+<div id="comment_bar"></div>
+<div id="comment_form"></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '6553011';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+<div id="ad_bot"></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+<div id="d-top" style="display:none;">
+<a id="d-top-a" href="6553011.html#" title="回到顶部">
+<img src="http://static.blog.csdn.net/images/top.png" alt="TOP" /></a>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var d_top=$('#d-top');
+        document.onscroll=function(){
+            var scrTop=(document.body.scrollTop||document.documentElement.scrollTop);
+            if(scrTop>500){
+                d_top.show();
+            }else{
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function(){
+            scrollTo(0,0);
+            this.blur();
+            return false;
+        });
+    });
+</script>
+
+<div class="clear"></div>
+</div>
+</div>
+
+<div id="side">
+<div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/metaphysis" target="_blank">
+    <img src="http://avatar.csdn.net/7/5/C/1_metaphysis.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/metaphysis" class="user_name" target="_blank">metaphysis</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]"></a>
+</div>
+<div id="blog_medal">
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>118064次</span></li>
+    <li>积分：<span>2991分</span></li>
+    <li>排名：<span>第2304名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>145篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>150条</span></li>
+</ul>
+</ul>
+</div>
+
+<div class="panel">
+<ul class="panel_body" style="padding:0;">
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script> 
+<script type="text/javascript"> 
+BAIDU_CLB_preloadSlots("724643","117306"); 
+</script>
+<script type="text/javascript">BAIDU_CLB_fillSlot("724643");</script> 
+</ul>
+</div>
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="submit" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825017">入门</a><span>(16)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/833251">回溯法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825019">字符串</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825020">排序</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825018">数据结构</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/831168">数论</a><span>(10)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828006">算术与代数</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828459">组合数学</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/861876">日常应用</a><span>(3)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/894878">图遍历</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895070">图算法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a><span>(14)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895072">网格</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895073">几何</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895074">计算几何</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895619">算法总结</a><span>(3)</span>
+</li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="http://blog.csdn.net/metaphysis/article/month/2013/05">2013年05月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2013/04">2013年04月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/12">2011年12月</a><span>(13)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/11">2011年11月</a><span>(34)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/10">2011年10月</a><span>(24)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/09">2011年09月</a><span>(6)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/07">2011年07月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/06">2011年06月</a><span>(17)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/05">2011年05月</a><span>(42)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head"><span>阅读排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(9824)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(3624)</span>
+</li>
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(3251)</span>
+</li>
+<li>
+<a href="6885767.html" title="Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11">Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11</a><span>(3137)</span>
+</li>
+<li>
+<a href="6560047.html" title="UVa Problem 10181 15-Puzzle Problem （15 数码游戏）">UVa Problem 10181 15-Puzzle Problem （15 数码游戏）</a><span>(1989)</span>
+</li>
+<li>
+<a href="6668040.html" title="Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法">Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法</a><span>(1965)</span>
+</li>
+<li>
+<a href="6860405.html" title="UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）">UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）</a><span>(1507)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(1475)</span>
+</li>
+<li>
+<a href="6877397.html" title="UVa Problem 10261 Ferry Loading （渡船装载）">UVa Problem 10261 Ferry Loading （渡船装载）</a><span>(1367)</span>
+</li>
+<li>
+<a href="6953949.html" title="UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）">UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）</a><span>(1281)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend"></ul>
+</div>
+<script type="text/javascript">
+ new Ad(12, 'ad_commend');
+</script><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u010537978" class="user_name">u010537978</a>:
+天外有天，人外有人！一个不是搞计算机算法的人能写出如此程序与我们分享,感谢！与惭愧！
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:刚才自己测试了下，确实 16 块就可以了。我已经在程序中做了修正。
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:哦？！您能在回复里面给出具体的拆分方案吗？
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/vania" class="user_name">vania</a>:
+如果我的代码没算错的话，n = 47时用16块小方块也可以拼出来。而且我用我的16块的方案在uva上...
+    </p>
+    </li>
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/kisstears" class="user_name">kisstears</a>:
+楼主这都是你自己写的啊？厉害
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@u011044487:你能详细描述一下你的算法过程吗？看代码有点乱。
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011044487" class="user_name">u011044487</a>:
+博主，我用的好像是DFS，但老是WA。能否帮我看一下。http://vdisk.weibo.com/...
+    </p>
+    </li>
+    <li>
+    <a href="8775269.html#comments">“No mapping for the Unicode character exists in the target multi-byte code page” 错误解决方法</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/acrodelphi" class="user_name">acrodelphi</a>:
+客户端修改：使用FileZilla免费的FTP客户端软件，把“站点属性-字符集”，修改为“强制UTF...
+    </p>
+    </li>
+    <li>
+    <a href="6432193.html#comments">UVa Problem 843 Crypt Kicker （解密）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/zeroalex" class="user_name">zeroalex</a>:
+我参考您的自己写了个代码可还是wa可以请你帮我看一下问题吗...
+    </p>
+    </li>
+    <li>
+    <a href="6431937.html#comments">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011377352" class="user_name">u011377352</a>:
+@u011377352:好了我明白了i，j按原来顺序输出额
+    </p>
+    </li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(18)</span>
+</li>
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432062.html" title="UVa Problem 10137 The Trip （旅行）">UVa Problem 10137 The Trip （旅行）</a><span>(12)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(7)</span>
+</li>
+<li>
+<a href="6432094.html" title="UVa Problem 10196 Check the Check （将军）">UVa Problem 10196 Check the Check （将军）</a><span>(7)</span>
+</li>
+<li>
+<a href="6939857.html" title="UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）">UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）</a><span>(6)</span>
+</li>
+<li>
+<a href="6453207.html" title="UVa Problem 10202 Pairsumonious Numbers （两两之和）">UVa Problem 10202 Pairsumonious Numbers （两两之和）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432193.html" title="UVa Problem 843 Crypt Kicker （解密）">UVa Problem 843 Crypt Kicker （解密）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432247.html" title="UVa Problem 10044 Erdos Numbers （Erdos 数）">UVa Problem 10044 Erdos Numbers （Erdos 数）</a><span>(5)</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js?v=1.1"></script>
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=75031"></script>
+
+<script type="text/javascript">
+document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js?v=1"></script>
+
+
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+
+<script type="text/javascript" src="http://zz.csdn.net/js/count.js"></script>
+
+</div>
+</body>
+</html>

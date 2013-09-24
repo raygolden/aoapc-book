@@ -1,0 +1,770 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>UVa Problem 10149 Yahtzee （Yahtzee 游戏） - 寂静山林 - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="// Yahtzee （Yahtzee 游戏）// PC/UVa IDs: 110208/10149, Popularity: C, Success rate: average Level: 3// 版权所有（C），邱秋，2011。metaphysis at yeah dot" />
+<script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+<link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/ink/css/style.css?v=1.1" />
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/metaphysis/rss/list" />
+<link rel="shortcut icon" href="../../../favicon.ico" />
+<link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+</head>
+<body>
+<script src="http://csdnimg.cn/pubnav/js/pub_topnav_2011.js"type="text/javascript"></script>
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1><a href="http://blog.csdn.net/metaphysis">寂静山林</a></h1>
+            <h2></h2>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg"></div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="http://blog.csdn.net/metaphysis?viewmode=contents"><span><img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/metaphysis?viewmode=list"><span><img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/metaphysis/rss/list"><span><img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "metaphysis";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/metaphysis";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";
+</script>
+
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/9819385" target="_blank">
+<font color=red>《这些年，我们读过的技术经典图书》主题有奖征文</font></a>
+
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://www.csdn.net/article/2013-08-06/2816471" target="_blank"><font color=blue>专访李铁军：从医生到金山首席安全专家的转变 
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<a href="http://blog.csdn.net/adali/article/details/9813651"target="_blank">
+<font color=blue>独一无二的职位：开源社区经理 
+ </font></a>
+
+
+
+
+</div>
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="6432286.html">
+        UVa Problem 10149 Yahtzee （Yahtzee 游戏）
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a> 
+        </span>
+    <span class="link_postdate">2011-05-19 15:43</span>
+    <span class="link_view" title="阅读次数">1033人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="6432286.html#comments">评论</a>(3)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('UVa Problem 10149 Yahtzee （Yahtzee 游戏）','6432286');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="6432286.html#report"  onclick="javascript:report(6432286,2);return false;" title="举报">举报</a></span>
+    
+</div>
+<div class="tag2box"><a href='http://blog.csdn.net/tag/details.html?tag=%e6%b8%b8%e6%88%8f' target=_blank>游戏</a><a href='http://blog.csdn.net/tag/details.html?tag=c' target=_blank>c</a><a href='http://blog.csdn.net/tag/details.html?tag=%e7%ae%97%e6%b3%95' target=_blank>算法</a><a href='http://blog.csdn.net/tag/details.html?tag=string' target=_blank>string</a><a href='http://blog.csdn.net/tag/details.html?tag=date' target=_blank>date</a></div>
+
+
+    
+<div id="article_content" class="article_content">
+
+<pre name="code" class="cpp">// Yahtzee （Yahtzee 游戏）
+// PC/UVa IDs: 110208/10149, Popularity: C, Success rate: average Level: 3
+// 版权所有（C），邱秋，2011。metaphysis at yeah dot net
+// Verdict: Accepted
+// Submission Date: 2011-05-16
+// UVa Run Time: 0.088s
+//
+// 每组色子可以选择13种计分方式中的任意一种，已选择的计分方式不能再次选取。如果将每组色子按每种计
+// 分方式进行计分，并将分值排列如下，则可以得到一个矩阵。
+// 
+//       C1 C2 C3 C4 C5 C6 C7 C8 C9 C10 C11 C12 C13
+//       ------------------------------------------
+// R1  | a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13
+// R2  | b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 b12 b13
+// R3  | c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13
+// R4  | d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13
+// R5  | e1 e2 e3 e4 e5 e6 e7 e8 e9 e10 e11 e12 e13
+// R6  | f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 f13
+// R7  | g1 g2 g3 g4 g5 g6 g7 g8 g9 g10 g11 g12 g13
+// R8  | h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 h11 h12 h13
+// R9  | i1 i2 i3 i4 i5 i6 i7 i8 i9 i10 i11 i12 i13
+// R10 | j1 j2 j3 j4 j5 j6 j7 j8 j9 j10 j11 j12 j13
+// R11 | k1 k2 k3 k4 k5 k6 k7 k8 k9 k10 k11 k12 k13
+// R12 | l1 l2 l3 l4 l5 l6 l7 l8 l9 l10 l11 l12 l13
+// R13 | m1 m2 m3 m4 m5 m6 m7 m8 m9 m10 m11 m12 m13
+//
+// 其中 Ci(i = 1，..，13)，表示计分种类。Ri(i = 1，..，13)，表示色子组数。a1 - a13 表示第一
+// 组色子按各种计分方式所得到的分数，其余的类推。题目的要求实际上可以转化为下列问题（暂时不考虑奖
+// 励分的情况）：从上述 13 行 13 列的矩阵中，每一行和每一列只取一个数并将取出的数相加，求出能取到的
+// 最大值和取法，有多种取法可以只举出一种。直观的，第一行可以取 13 种取法，第二行有 12 种取法，类似
+// 的，总共有 13！ = 6227020800 种取法，如果用穷举算法，肯定是可以找到最大值的，但是程序运行
+// 时间超出要求。穷举算法在计算过程中多次重复计算，这是导致程序运行时间大大增加的原因，为了提高效
+// 率，必须减少重复计算量。有算法基础的人应该可以意识到应该使用动态规划（Dynamic Programming）
+// 算法来解决该问题。
+//
+// Yahtzee 问题实际上就是一个典型的应用动态规划算法的问题。在应用动态规划时，一个技巧是使用位掩码
+// （bitmask）来构建所有的组合情况，如上例所示，13种计分方式总共有 2^13 = 8192 种不同的组合
+// 方式，对于每种组合方式求取最大值，逐步得到结果。对于上面给出的矩阵，假设第一组色子选取了第一种计
+// 分方案，分值为a1，则第二组色子只能在 2 - 13 种计分方式中任选一种，怎样表示这种状态呢？如果把各次
+// 选择计分方式的状态表示下列形式：
+//
+// C1  C2  C3  C4  C5  C6  C7  C8  C9  C10  C11  C12  C13
+// 1   1   0   0   0   0   0   0   0   0    0    0    0
+//
+// 当某种计分方式已经使用，则该种计分方式下面为 1，否则为 0。第一组色子选择了第一种计分方式，则 C1 为
+// 1，假设第二组色子使用了第二种计分方式，则 C2 为 1，将 C1 到 C13 的 1 和 0 的状态转换为 1 个
+// 二进制数（C13 在最前，C1 在最末尾）则为：
+//
+// 0000000000011 （b）
+//
+// 该二进制数为 10 进制数的 3。若相反，第一组色子选择第二种计分方式，第二组色子选择第一种计分方式，这
+// 样得到的二进制数仍然是：
+//
+// 0000000000011 （b）
+//
+// 那么该状态表示的是不管第一组和第二组色子选择第一或第二种计分方式的顺序如何，只要比较两种选择下
+// 那种选择的分值大，此时我们设立一个数组sum，将该二进制数即十进制的 3 作为数组的序号，则该数组元素
+// 所表示的就是当第一和第二组色子选择第一或第二种计分方式时的最大值。同理，对于以下二进制数：
+//
+// 0000000000101 （b）
+//
+// 表示的是第一组色子和第三组色子各取第一或第三种计分方式，同样以该二进制数即十进制下的 5 作为数组
+// 序号，将所得计分和的最大值储存到 sum[5] 中。考虑以下二进制数所表示的状态：
+//
+// 0000000000111 （b）
+//
+// 前三组色子选择了前三种计分方式，此二进制数可能为 0000000000011 （b）与 0000000000100 （b）
+// 相加而来，也可以是 0000000000101 （b） 与0000000000010 （b） 相加而来，两种操作的含义第
+// 一种是当第一组和第二组色子取遍第一种和第二种计分方式得到的最大值与第三组色子取第三中计分方式得
+// 到的分值相加，第二种表示第一组和第三组色子取遍第一种和第三种计分方式所得到的最大值与第二组色子
+// 取第二种计分方式得到的分值相加，如果比较两种操作的所得到的分值，并将较大值储存到二进制数
+// 0000000000111 （b） 即十进制数7为序数的数组元素 sum[7] 中，则 sum[7] 的含义就是前三组色子取
+// 前三种计分方式，不管选取顺序如何，所得到的最大值。以此类推下去，当为下列状态时：
+//
+// 1111111111111 （b）
+//
+// 即求得了最大值。在求最大值的过程中需要一个数组来保存各个策略状态最大值所采取的计分方式，以便在
+// 最后根据该数组来回溯得到各个策略状态所采取的计分方式。对于奖励分的处理，因为是前六项计分大于或
+// 等于 63 分时加上 35 分的奖励分，所以在计算过程中，需将同策略的不同前六项得分的总分区分开来，因为大
+// 于等于63的前六项得分效果是等同的，故只需考虑 0 ~ 63 这 64 种情况，一个总分，如果前六项总分大于等于
+// 63，则将该总分放在数组序号为 63 的总分元素中，小于 63 的则放在相应分数为序号的元素中，在比较
+// 时，对前六项总分相同的元素比较总分大小，总分大的替代原来的元素项，那么数组的每一项储存的是前六
+// 项分数和等于数组元素序号时的最大总分。如 sum[1111011100011 （b）][25] 表示的是采用策略
+// 1111011100011 （b） 时前六项分数为25的最大总分，可能采用该策略的前六项分数为 25 的并不存在，则
+// 数组元素值为 -1。同样的需要在替换时记录替换前后的所采用的计分策略和前六项得分以便回溯得到解的过
+// 程。本算法时间复杂度为 O（n * （2^n）），空间复杂度为 O（2^n）。
+	
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstring&gt;
+	
+using namespace std;
+	
+#define NDICES	5		// 每组色子的数量。
+#define NROUNDS	13		// 掷色子的轮数。
+#define NCOMBINATIONS	8192	// 1 &lt;&lt; 13，计分种类的不同组合方式种数。
+#define NCATEGORIES	13	// 计分种类。
+#define NUPPER	64		// 63（奖励分条件） + 1
+#define NBOUNS	35		// 奖励分
+	
+// 为计算一个二进制数中 1 的位数定义的宏。
+#define POW(c) (1&lt;&lt;(c))
+#define MASK(c) (((unsigned long)-1) / (POW(POW(c)) + 1))
+#define ROUND(n, c) (((n) &amp; MASK(c)) + ((n) &gt;&gt; POW(c) &amp; MASK(c)))
+	
+// 计算整数 n 表示为二进制数时位为 1 的个数。
+int bits(int n)
+{
+	n = ROUND(n, 0);
+	n = ROUND(n, 1);
+	n = ROUND(n, 2);
+	n = ROUND(n, 3);
+	n = ROUND(n, 4);
+
+	return n;
+}
+	
+// 根据不同计分方式计算一组色子的分值，对于后6种计分方式，需要先判断
+// 是否符合该种计分方式的要求，符合则返回相应的分数，否则计 0 分。
+int scoring(int dices[NDICES], int category)
+{
+	// 计一到计六。
+	int ret = 0;
+	if (category &lt; 6)
+	{
+		for (int i = 0; i &lt; NDICES; i++)
+			if (dices[i] == (category + 1))
+				ret += dices[i];
+	}
+	else
+	{
+		switch (category)
+		{
+				// 机会。
+			case 6:
+				for (int i = 0; i &lt; NDICES; i++)
+					ret += dices[i];
+				break;
+				// 三同。
+			case 7:
+				if (dices[0] == dices[2] || dices[1] == dices[3]
+				 || dices[2] == dices[4])
+					for (int i = 0; i &lt; NDICES; i++)
+						ret += dices[i];
+				break;
+				// 四同。
+			case 8:
+				if (dices[0] == dices[3] || dices[1] == dices[4])
+					for (int i = 0; i &lt; NDICES; i++)
+						ret += dices[i];
+				break;
+				// 五同。
+			case 9:
+				if (dices[0] == dices[4])
+					ret = 50;
+				break;
+				// 小顺。
+			case 10:
+				bool value[6];
+				memset(value, 0, sizeof(value));
+
+				for (int i = 0; i &lt; 5; i++)
+					value[dices[i] - 1] = true;
+
+				for (int i = 0; i &lt; 3; i++)
+					if (value[i] &amp;&amp; value[i + 1] &amp;&amp; 
+					value[i + 2] &amp;&amp; value[i + 3])
+						ret = 25;
+				break;
+				// 大顺。
+			case 11:
+				if (dices[1] == (dices[0] + 1) &amp;&amp;
+					dices[2] == (dices[1] + 1) &amp;&amp;
+					dices[3] == (dices[2] + 1) &amp;&amp;
+					dices[4] == (dices[3] + 1))
+					
+					ret = 35;
+				break;
+				// 葫芦。
+			case 12:
+				if (dices[0] == dices[1] &amp;&amp;
+					dices[2] == dices[4] ||
+					dices[0] == dices[2] &amp;&amp;
+					dices[3] == dices[4])
+					ret = 40;
+				break;
+		}
+	}
+	
+	return ret;
+}
+	
+void dynamic_programming(int yahtzee[NROUNDS][NDICES])
+{
+	int score[NROUNDS][NROUNDS];	// 保存各组色子按不同计分方式所得分。
+	int sum[NCOMBINATIONS][NUPPER];	// 保存每种策略的总分数。
+	// memo[NCOMBINATIONS][NUPPER][0] 记录每种策略所使用的
+	// 计分方式，memo[NCOMBINATIONS][NUPPER][1] 记录前六项分数。
+	int memo[NCOMBINATIONS][NUPPER][2];
+	
+	// 计算第（i + 1）组色子使用第（j + 1）种计分方式时的得分。
+	for (int i = 0; i &lt; NROUNDS; i++)
+		for (int j = 0; j &lt; NCATEGORIES; j++)
+			score[i][j] = scoring(yahtzee[i], j);
+
+	
+	// 初始化总分数组为 -1，未选择策略时总分为 0。
+	memset(sum, -1, sizeof(sum));
+	sum[0][0] = 0;
+	
+	int b, s, t, d, a;
+	// 遍历所有可能的计分组合方式，并计算每种组合方式下的最大分值，
+	for (int m = 0; m &lt; NCOMBINATIONS; m++)
+		for (int c = 0; c &lt; NCATEGORIES; c++)
+			// 必须保证第（c + 1）种计分方式尚未使用。
+			if (!(m &amp; (1 &lt;&lt; c)))
+			{
+				// 计算当m表示为二进制数时位为1的个数，表示
+				// 当前是为第（b + 1）组色子选择计分方式。
+				b = bits(m);
+
+				// 第（b + 1）组色子的第（c + 1）种计分方式得分。
+				s = score[b][c];
+				// 当前使用策略的二进制标志。
+				t = m | (1 &lt;&lt; c);
+				// 如果所选计分方式为前六种方式之一，则加上该组色子此种计
+				// 分方式得分。
+				a = (c &lt; 6) ? s : 0;	
+
+				for (int u = 0; u &lt; NUPPER; u++)
+					if (sum[m][u] &gt; -1)
+					{
+						d = ((u + a) &lt; (NUPPER - 1) ? 
+							(u + a) : (NUPPER - 1));
+
+						if (sum[t][d] &lt; (sum[m][u] + s))
+						{
+							memo[t][d][0] = c;
+							memo[t][d][1] = u;
+							sum[t][d] = sum[m][u] + s;
+						}
+					}
+			}
+	
+	// 判断最大总分是否包含奖励分。
+	int max = 0, bouns = 0, upper, total;
+	// 无奖励分的最大总分值。
+	for (int u = 0; u &lt; NUPPER - 1; u++)
+		if (sum[NCOMBINATIONS - 1][u] &gt; max)
+		{
+			max = sum[NCOMBINATIONS - 1][u];
+			upper = u;
+		}
+	
+	// 有奖励分的最大总分值。
+	total = max;
+	if (sum[NCOMBINATIONS - 1][NUPPER - 1] &gt; -1)
+	{
+		bouns = NBOUNS;
+		total = sum[NCOMBINATIONS - 1][NUPPER - 1] + bouns;
+	}
+	
+	// 比较两种总分值的大小。
+	if (max &lt; total)
+	{
+		max = total;
+		upper = NUPPER - 1;
+	}
+	
+	// 根据 memo 数组回溯得到解的过程。
+	int last = NCOMBINATIONS - 1;
+	int category[NROUNDS];
+	for (int i = NROUNDS - 1; i &gt;= 0; i--)
+	{
+		category[i] = memo[last][upper][0];
+		upper = memo[last][upper][1];
+		last ^= (1 &lt;&lt; category[i]);
+	}
+	
+	// 根据解输出结果。
+	for (int i = 0; i &lt; NCATEGORIES; i++)
+		for (int j = 0; j &lt; NROUNDS; j++)
+			if (category[j] == i)
+				cout &lt;&lt; score[j][i] &lt;&lt; &quot; &quot;;
+	
+	cout &lt;&lt; bouns &lt;&lt; &quot; &quot; &lt;&lt; max &lt;&lt; endl;
+}
+	
+bool cmp(int a, int b)
+{
+	return a &lt; b;
+}
+	
+int main(int ac, char *av[])
+{
+	int yahtzee[NROUNDS][NDICES];
+	string line;
+	int count = 0;
+	
+	while (getline(cin, line))
+	{
+		istringstream iss(line);
+		for (int i = 0; i &lt; NDICES; i++)
+			iss &gt;&gt; yahtzee[count % NROUNDS][i];
+
+		sort(yahtzee[count % NROUNDS], yahtzee[count % NROUNDS] + NDICES, cmp);
+
+		if (++count % NROUNDS == 0)
+			dynamic_programming(yahtzee);
+	}
+	
+	return 0;
+}</pre><br>
+<br>
+
+</div>
+
+<div class="share_buttons" id="sharePanel"></div>
+<!--192.168.100.34-->
+<div class="article_next_prev">
+    <li class="prev_article"><span>上一篇：</span><a href="6432278.html">UVa Problem 10258 Contest Scoreboard （比赛计分板）</a></li>
+    <li class="next_article"><span>下一篇：</span><a href="6432295.html">UVa Problem 10082 WERTYU （WERTYU 键盘）</a></li>
+</div>
+
+
+            <div id="digg" ArticleId="6432286">
+            <dl id="btnDigg" class="digg digg_disable">
+                <dt>顶</dt>
+                <dd>17</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+                <dt>踩</dt>
+                <dd>0</dd>
+            </dl>
+        </div>
+
+</div>
+<div id="ad_cen">
+<script type="text/javascript" >BAIDU_CLB_SLOT_ID = "117306";</script>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/o.js"></script>
+</div>
+<script type="text/javascript">
+    //new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"></div>
+<div id="comment_bar"></div>
+<div id="comment_form"></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '6432286';
+    var commentscount = 3;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+<div id="ad_bot"></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+<div id="d-top" style="display:none;">
+<a id="d-top-a" href="6432286.html#" title="回到顶部">
+<img src="http://static.blog.csdn.net/images/top.png" alt="TOP" /></a>
+</div>
+<script type="text/javascript">
+    $(function(){
+        var d_top=$('#d-top');
+        document.onscroll=function(){
+            var scrTop=(document.body.scrollTop||document.documentElement.scrollTop);
+            if(scrTop>500){
+                d_top.show();
+            }else{
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function(){
+            scrollTo(0,0);
+            this.blur();
+            return false;
+        });
+    });
+</script>
+
+<div class="clear"></div>
+</div>
+</div>
+
+<div id="side">
+<div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/metaphysis" target="_blank">
+    <img src="http://avatar.csdn.net/7/5/C/1_metaphysis.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/metaphysis" class="user_name" target="_blank">metaphysis</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]"></a>
+</div>
+<div id="blog_medal">
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>118064次</span></li>
+    <li>积分：<span>2991分</span></li>
+    <li>排名：<span>第2304名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>145篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>150条</span></li>
+</ul>
+</ul>
+</div>
+
+<div class="panel">
+<ul class="panel_body" style="padding:0;">
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script> 
+<script type="text/javascript"> 
+BAIDU_CLB_preloadSlots("724643","117306"); 
+</script>
+<script type="text/javascript">BAIDU_CLB_fillSlot("724643");</script> 
+</ul>
+</div>
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="submit" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825017">入门</a><span>(16)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/833251">回溯法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825019">字符串</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825020">排序</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/825018">数据结构</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/831168">数论</a><span>(10)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828006">算术与代数</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/828459">组合数学</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/861876">日常应用</a><span>(3)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/894878">图遍历</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895070">图算法</a><span>(9)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895071">动态规划</a><span>(14)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895072">网格</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895073">几何</a><span>(8)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895074">计算几何</a><span>(11)</span>
+</li>
+<li>
+<a href="http://blog.csdn.net/metaphysis/article/category/895619">算法总结</a><span>(3)</span>
+</li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="http://blog.csdn.net/metaphysis/article/month/2013/05">2013年05月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2013/04">2013年04月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/12">2011年12月</a><span>(13)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/11">2011年11月</a><span>(34)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/10">2011年10月</a><span>(24)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/09">2011年09月</a><span>(6)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/07">2011年07月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/06">2011年06月</a><span>(17)</span></li><li><a href="http://blog.csdn.net/metaphysis/article/month/2011/05">2011年05月</a><span>(42)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head"><span>阅读排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(9824)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(3624)</span>
+</li>
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(3251)</span>
+</li>
+<li>
+<a href="6885767.html" title="Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11">Linux 显示器未正确识别 最佳分辨率 Ubuntu 10.10 X11</a><span>(3137)</span>
+</li>
+<li>
+<a href="6560047.html" title="UVa Problem 10181 15-Puzzle Problem （15 数码游戏）">UVa Problem 10181 15-Puzzle Problem （15 数码游戏）</a><span>(1989)</span>
+</li>
+<li>
+<a href="6668040.html" title="Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法">Ubuntu 10.10 天翼3G 华为EC1260 无线上网设置方法</a><span>(1965)</span>
+</li>
+<li>
+<a href="6860405.html" title="UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）">UVa Problem 10131 Is Bigger Smarter? （越大越聪明？）</a><span>(1507)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(1475)</span>
+</li>
+<li>
+<a href="6877397.html" title="UVa Problem 10261 Ferry Loading （渡船装载）">UVa Problem 10261 Ferry Loading （渡船装载）</a><span>(1367)</span>
+</li>
+<li>
+<a href="6953949.html" title="UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）">UVa Problem 10180 Rope Crisis in Ropeland! （绳子王国的危机！）</a><span>(1281)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend"></ul>
+</div>
+<script type="text/javascript">
+ new Ad(12, 'ad_commend');
+</script><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u010537978" class="user_name">u010537978</a>:
+天外有天，人外有人！一个不是搞计算机算法的人能写出如此程序与我们分享,感谢！与惭愧！
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:刚才自己测试了下，确实 16 块就可以了。我已经在程序中做了修正。
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@vania:哦？！您能在回复里面给出具体的拆分方案吗？
+    </p>
+    </li>
+    <li>
+    <a href="6820367.html#comments">UVa Problem 10270 Bigger Square Please... （拼接正方形）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/vania" class="user_name">vania</a>:
+如果我的代码没算错的话，n = 47时用16块小方块也可以拼出来。而且我用我的16块的方案在uva上...
+    </p>
+    </li>
+    <li>
+    <a href="6965147.html#comments">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/kisstears" class="user_name">kisstears</a>:
+楼主这都是你自己写的啊？厉害
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/metaphysis" class="user_name">metaphysis</a>:
+@u011044487:你能详细描述一下你的算法过程吗？看代码有点乱。
+    </p>
+    </li>
+    <li>
+    <a href="6432247.html#comments">UVa Problem 10044 Erdos Numbers （Erdos 数）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011044487" class="user_name">u011044487</a>:
+博主，我用的好像是DFS，但老是WA。能否帮我看一下。http://vdisk.weibo.com/...
+    </p>
+    </li>
+    <li>
+    <a href="8775269.html#comments">“No mapping for the Unicode character exists in the target multi-byte code page” 错误解决方法</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/acrodelphi" class="user_name">acrodelphi</a>:
+客户端修改：使用FileZilla免费的FTP客户端软件，把“站点属性-字符集”，修改为“强制UTF...
+    </p>
+    </li>
+    <li>
+    <a href="6432193.html#comments">UVa Problem 843 Crypt Kicker （解密）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/zeroalex" class="user_name">zeroalex</a>:
+我参考您的自己写了个代码可还是wa可以请你帮我看一下问题吗...
+    </p>
+    </li>
+    <li>
+    <a href="6431937.html#comments">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a>
+    <p style="margin:0px;"><a href="http://blog.csdn.net/u011377352" class="user_name">u011377352</a>:
+@u011377352:好了我明白了i，j按原来顺序输出额
+    </p>
+    </li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="6431937.html" title="UVa Problem 100 The 3n+1 problem （3n+1 问题）">UVa Problem 100 The 3n+1 problem （3n+1 问题）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432031.html" title="UVa Problem 10189 Minesweeper （扫雷）">UVa Problem 10189 Minesweeper （扫雷）</a><span>(18)</span>
+</li>
+<li>
+<a href="6727052.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）">《挑战编程:程序设计竞赛训练手册》- 题解（第一章 - 第八章）</a><span>(18)</span>
+</li>
+<li>
+<a href="6432062.html" title="UVa Problem 10137 The Trip （旅行）">UVa Problem 10137 The Trip （旅行）</a><span>(12)</span>
+</li>
+<li>
+<a href="6965147.html" title="《挑战编程:程序设计竞赛训练手册》- 题解（全）">《挑战编程:程序设计竞赛训练手册》- 题解（全）</a><span>(7)</span>
+</li>
+<li>
+<a href="6432094.html" title="UVa Problem 10196 Check the Check （将军）">UVa Problem 10196 Check the Check （将军）</a><span>(7)</span>
+</li>
+<li>
+<a href="6939857.html" title="UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）">UVa Problem 10177 (2/3/4)-D Sqr/Rects/Cubes/Boxes? （2/3/4-维立方体？）</a><span>(6)</span>
+</li>
+<li>
+<a href="6453207.html" title="UVa Problem 10202 Pairsumonious Numbers （两两之和）">UVa Problem 10202 Pairsumonious Numbers （两两之和）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432193.html" title="UVa Problem 843 Crypt Kicker （解密）">UVa Problem 843 Crypt Kicker （解密）</a><span>(6)</span>
+</li>
+<li>
+<a href="6432247.html" title="UVa Problem 10044 Erdos Numbers （Erdos 数）">UVa Problem 10044 Erdos Numbers （Erdos 数）</a><span>(5)</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js?v=1.1"></script>
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=75031"></script>
+
+<script type="text/javascript">
+document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js?v=1"></script>
+
+
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+
+<script type="text/javascript" src="http://zz.csdn.net/js/count.js"></script>
+
+</div>
+</body>
+</html>
